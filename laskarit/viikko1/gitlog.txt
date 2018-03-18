@@ -1,0 +1,115 @@
+commit b3f73aaae5666e446dddb902a9a5996df1e87fa2
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 19:27:41 2018 +0200
+
+    file1 poistettu ja file2 muutettu file22:ksi
+
+ tiedostoja/file1  | 0
+ tiedostoja/file2  | 0
+ tiedostoja/file22 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c1c9f4ba762d33cd5ae9945bf2cdea8c3d4ec70f
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 19:20:29 2018 +0200
+
+    tiedostoja hakemisto tehty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit b7051f87c31074b3edf501a582ceab60074bffd9
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 19:13:29 2018 +0200
+
+    eka ja kolmas muokattu
+
+ eka.txt    | 2 +-
+ kolmas.txt | 4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit 05c1aafd389448769d79af9838f54a9eae20bd2d
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 18:14:09 2018 +0200
+
+    tiedosto uudelleennimetty ekksi
+
+ eka.txt      | 14 ++++++++++++++
+ tiedosto.txt | 14 --------------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+
+commit 5830dd692e107b0b0725a716f4ef8b8ce37a7ea9
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 18:12:23 2018 +0200
+
+    toinen.txt poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit ff1ac0b762419eed3b3162ae9aae2ea2c42326e7
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 18:09:56 2018 +0200
+
+    tekstiä poistettu ja lisätty
+
+ tiedosto.txt | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+commit e978b43d7f96794fa7d63218cc23ebd608352c8c
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Sun Mar 18 18:09:00 2018 +0200
+
+    teksti lisätty
+
+ tiedosto.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 01be9c0f1ef90f4659be33ca5756776329bd0f0a
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Tue Mar 13 17:09:51 2018 +0200
+
+    lisättiin stuff ja sen tiedosto
+
+ stuff/jokin.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 85483fcd050c12c8695d23827dbbbd6636d9b0ea
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Tue Mar 13 17:08:15 2018 +0200
+
+    toinen ja kolmas muutettu
+
+ kolmas.txt | 2 ++
+ toinen.txt | 1 +
+ 2 files changed, 3 insertions(+)
+
+commit 664b999c2f9da1566baa437d259a741777bd2489
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Tue Mar 13 17:06:21 2018 +0200
+
+    kolmas lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 1e6806acf0e5f61d9ab7616a5361ee8d6b934c57
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Tue Mar 13 17:03:53 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit fac8e1b77cbdd59df2a8bd50cdb38dd2abf6c11f
+Author: Joonas <joonas.suortti@helsinki.fi>
+Date:   Tue Mar 13 17:01:13 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
