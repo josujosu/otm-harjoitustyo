@@ -1,6 +1,6 @@
 # Tämä on README
 
-README:ssä lukee **tärkeää** asiaa. Koodi **pushataan** githubiin komennolla *git push*. *git push* on siis **muistettava**.
+README:ssä lukee **tärkeää** asiaa. Koodi **pushataan** githubiin komennolla *git push*. *git push* on siis **muistettava**. (tämä on viikko1-tehtävien vaatima muutos)
 
 ## Viikko 1
 
