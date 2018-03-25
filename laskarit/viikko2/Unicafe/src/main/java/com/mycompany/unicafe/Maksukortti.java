@@ -30,7 +30,11 @@ public class Maksukortti {
     public String toString() {
         int euroa = saldo/100;
         int senttia = saldo%100;
-        return "saldo: "+euroa+"."+senttia;
+        if(senttia >= 10){
+            return "saldo: "+euroa+"."+senttia;
+        } else {
+            return "saldo: "+euroa+".0"+senttia;
+        }
     } 
     
 }
