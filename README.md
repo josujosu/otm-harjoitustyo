@@ -18,3 +18,6 @@ README:ssä lukee **tärkeää** asiaa. Koodi **pushataan** githubiin komennolla
 [Maksukortti](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko2/Maksukortti)
 
 [Unicafe](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko2/Unicafe)
+
+[Unicafe testikattavuus kuva](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko2/UnicafeTestikattavuus.png)
+
