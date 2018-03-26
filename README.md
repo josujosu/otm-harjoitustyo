@@ -9,3 +9,12 @@ README:ssä lukee **tärkeää** asiaa. Koodi **pushataan** githubiin komennolla
 [komentorivi.txt](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 [gitlog.txt](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+
+
+## Viikko 2
+
+### Tehtävät
+
+[Maksukortti](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko2/Maksukortti)
+
+[Unicafe](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko2/Unicafe)
