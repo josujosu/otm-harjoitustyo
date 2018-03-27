@@ -21,3 +21,8 @@ README:ssä lukee **tärkeää** asiaa. Koodi **pushataan** githubiin komennolla
 
 [Unicafe testikattavuus kuva](https://github.com/josujosu/otm-harjoitustyo/blob/master/laskarit/viikko2/UnicafeTestikattavuus.png)
 
+### Harjotustyö
+
+[Vaatimusmäärittely](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+
+
