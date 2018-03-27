@@ -25,4 +25,6 @@ README:ssä lukee **tärkeää** asiaa. Koodi **pushataan** githubiin komennolla
 
 [Vaatimusmäärittely](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
+[Tuntikirjanpito](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+
 
