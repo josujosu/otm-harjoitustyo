@@ -9,8 +9,12 @@ package texasholdem.ui.text;
  *
  * @author josujosu
  */
-import texasholdem.ui.Scene;
-
-public class StartSceneText implements Scene{
+public class CreateUserTextScene implements TextScene{
+    
+    @Override
+    public TextScene run(){
+        System.out.println("hahahah");
+        return null;
+    }
     
 }

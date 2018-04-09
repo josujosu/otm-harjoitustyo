@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package texasholdem.ui;
+package texasholdem.ui.text;
 
 /**
  *
  * @author josujosu
  */
-public interface Scene {
+import java.util.Scanner;
+
+public interface TextScene {
+    
+    public Scanner scan = new Scanner(System.in);
+    
+    public TextScene run();
     
 }

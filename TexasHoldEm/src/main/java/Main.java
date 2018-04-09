@@ -8,10 +8,13 @@
  *
  * @author josujosu
  */
+import texasholdem.ui.text.TextUi;
+
 public class Main {
     
     public static void main(String[] args){
-        System.out.println("asdasda");
+        TextUi ui = new TextUi();
+        ui.run();
     }
     
 }
