@@ -12,15 +12,11 @@
 
 Testit voi suorittaa komennolla
 
-,,,
-mvn test
-,,,
+    mvn test
 
 Testikattavuusraportin voi luoda komennolla
 
-,,,
-mvn jacoco:report
-,,,
+    mvn jacoco:report
 
 Testikattavuusraporttia voi tarkastella avaamalla tiedoston *target/site/jacoco/index.html* selaimella
 
