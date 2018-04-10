@@ -26,7 +26,7 @@ public class Database {
         }
     }
     
-    public <T> List<T> queryAndCollect(String query, Collector col, Object...params) throws SQLException{
+    public <T> List<T> queryAndCollect(String query, Collector<T> col, Object...params) throws SQLException{
         List<T> lines = new ArrayList<>();
         PreparedStatement stmt = this.connection.prepareStatement(query);
         for(int i = 0; i < params.length; i++){
@@ -38,7 +38,24 @@ public class Database {
         while(rs.next()){
             lines.add(col.collect(rs));
         }
-        return null;
+        
+                rs.close();
+        stmt.close();
+        return lines;
+    }
+    
+    public int update(String updateQuery, Object... params) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(updateQuery);
+
+        for (int i = 0; i < params.length; i++) {
+            stmt.setObject(i + 1, params[i]);
+        }
+
+        int changes = stmt.executeUpdate();
+
+        stmt.close();
+
+        return changes;
     }
     
 }

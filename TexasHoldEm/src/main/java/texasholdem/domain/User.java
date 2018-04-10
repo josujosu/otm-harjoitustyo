@@ -20,6 +20,11 @@ public class User {
         this.username = username;
         this.balance = balance;
     }
+    
+    @Override
+    public String toString(){
+        return "id: " + this.id + ", username: " + this.username + ", balance: " + this.balance;
+    }
 
     /**
      * @return the id
