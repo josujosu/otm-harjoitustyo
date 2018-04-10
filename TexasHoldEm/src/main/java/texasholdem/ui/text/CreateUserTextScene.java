@@ -18,12 +18,12 @@ public class CreateUserTextScene implements TextScene{
     
     @Override
     public TextScene run(){
-        while(true){
-            System.out.println("-----Create user-----");
-            System.out.println("1: Create user");
-            System.out.println("2: List all created users");
-            System.out.println("3: Remove user");
-            System.out.println("x: Back to start screen");
+        System.out.println("-----Create User Menu-----");
+        System.out.println("1: Create user");
+        System.out.println("2: List all created users");
+        System.out.println("3: Remove user");
+        System.out.println("x: Back to start screen");
+        while(true){            
             System.out.print("> ");
             String command = scan.next();
         
