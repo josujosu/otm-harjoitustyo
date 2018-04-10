@@ -8,6 +8,12 @@
 
 ## Komentorivitoiminnot
 
+### Ohjelman ajaminen
+
+Ohjelman voi ajaa komentoriviltä komennolla
+
+    mvn compile exec:java -Dexec.mainClass=texasholdem.main.Main
+
 ### Testaus
 
 Testit voi suorittaa komennolla
