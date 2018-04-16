@@ -5,41 +5,46 @@
  */
 package texasholdem.database;
 
-import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
 import texasholdem.database.collector.Collector;
 
 /**
- *
- * @author josujosu
- */
+*
+* @author josujosu
+*/
 public class Database {
-    
+
     private Connection connection;
-    
-    public Database(String databaseAddress){
+
+    public Database(String databaseAddress) {
         try {
             this.connection = DriverManager.getConnection(databaseAddress);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
-    public <T> List<T> queryAndCollect(String query, Collector<T> col, Object...params) throws SQLException{
+
+    public <T> List<T> queryAndCollect(final String query, final Collector<T>
+            col, final Object...params) throws SQLException {
         List<T> lines = new ArrayList<>();
         PreparedStatement stmt = this.connection.prepareStatement(query);
-        for(int i = 0; i < params.length; i++){
+        for (int i = 0; i < params.length; i++) {
             stmt.setObject(i + 1, params[i]);
         }
-        
+
         ResultSet rs = stmt.executeQuery();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             lines.add(col.collect(rs));
         }
-        
-                rs.close();
+
+        rs.close();
         stmt.close();
         return lines;
     }

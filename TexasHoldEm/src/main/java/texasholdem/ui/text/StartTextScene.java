@@ -13,9 +13,10 @@ public class StartTextScene implements TextScene{
     
     @Override
     public TextScene run(){
-        System.out.print("-----Main Menu-----\n"
+        System.out.print("----Main Menu-----\n"
                     + "What do you want to do? \n"
                     + "1: Manage users\n"
+                    + "2: Play\n"
                     + "x: End program\n");
         while(true){
             System.out.print("> ");
@@ -23,6 +24,8 @@ public class StartTextScene implements TextScene{
         
             if(command.equals("1")){
                 return new CreateUserTextScene();
+            } else if (command.equals("2")) {
+                return new PlayingScene();
             } else if (command.equals("x")){
                 return null;
             } else {

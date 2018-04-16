@@ -19,38 +19,38 @@ import java.util.List;
  *
  * @author josujosu
  */
-public class UserDao implements Dao<User, Integer>{
-    
+public class UserDao implements Dao<User, Integer> {
+
     private Database db;
-    
-    public UserDao(Database db){
+
+    public UserDao(Database db) {
         this.db = db;
     }
-    
+
     @Override
-    public User findOne(Integer key) throws SQLException{
+    public User findOne(Integer key) throws SQLException {
         List<User> User = this.db.queryAndCollect("SELECT * FROM User WHERE id = ?", new UserCollector(), key);
-        if(User.isEmpty()){
+        if (User.isEmpty()) {
             return null;
         } else {
             return User.get(0);
         }
     }
-    
+
     @Override
-    public void save(User user)throws SQLException{
-        this.db.update("INSERT INTO User (username, balance) VALUES (?, ?)", user.getUsername(), user.getBalance());        
+    public void save(User user) throws SQLException {
+        this.db.update("INSERT INTO User (username, balance) VALUES (?, ?)", user.getUsername(), user.getBalance());
     }
-    
+
     @Override
-    public List<User> findAll() throws SQLException{
+    public List<User> findAll() throws SQLException {
         List<User> Users = this.db.queryAndCollect("SELECT * FROM User", new UserCollector());
         return Users;
     }
-    
+
     @Override
-    public void delete(Integer key) throws SQLException{
+    public void delete(Integer key) throws SQLException {
         this.db.update("DELETE FROM User WHERE id = ?", key);
     }
-    
+
 }
