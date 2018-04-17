@@ -1,5 +1,7 @@
 # TexasHold'Em
 
+Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. Käyttäjä voi luoda sovellukseen tunnuksen, jonka kautta voi tarkastella erinäisiä pelattuihin peleihin liittyviä tilastoja.
+
 ## Dokumentaatio
 
 [Työaikakirjanpito](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
