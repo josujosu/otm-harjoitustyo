@@ -6,6 +6,8 @@
 
 [Vaatimusmäärittely](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
+[Arkkitehtuuri](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman ajaminen
