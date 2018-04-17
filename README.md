@@ -28,3 +28,11 @@ Testikattavuusraportin voi luoda komennolla
 
 Testikattavuusraporttia voi tarkastella avaamalla tiedoston *target/site/jacoco/index.html* selaimella
 
+### Checkstyle
+
+Tiedostoon checkstyle.xml määritetyt tarkistukset voi suorittaa komennolla
+
+    mvn jxr:jxr checkstyle:checkstyle
+    
+Virheilmoitukset voi tarkastaa avaamalla tiedoston *target/site/checkstyle.html* selaimella
+
