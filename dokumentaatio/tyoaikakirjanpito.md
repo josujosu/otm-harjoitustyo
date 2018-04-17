@@ -6,3 +6,4 @@ Päivämäärä | Käytetty aika | Mitä tehty
 10.4. | 2 tuntia | Harjoitystyön jatkaminen
 14.4. | 0.5 tuntia | Harjoitustyötä jatkettu
 16.4. | 4 tuntia | Pelilogiikan luokkien tekeminen
+17.4. | 5 tuntia | Pelilogiikan ja testien ohjelmointi
