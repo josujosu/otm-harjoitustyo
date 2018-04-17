@@ -47,7 +47,6 @@ public class Game {
             hand = new Deck(this.deck.takeCards(2));
             newPlayers.put("CPU" + i, new Player(new User(i, "CPU", 4000), hand));
         }
-        System.out.println(newPlayers);
         return newPlayers;
     }
     
