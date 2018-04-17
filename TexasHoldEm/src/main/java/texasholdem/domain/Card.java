@@ -18,13 +18,13 @@ public class Card {
     private Suit suit;
     private int rank; // 2 is smallest, 14 is ace
     
-    public Card(Suit suit, int rank){
+    public Card(Suit suit, int rank) {
         this.suit = suit;
         this.rank = rank;
     }
     
     public String suitAsString(Card.Suit suit) {
-        switch(suit) {
+        switch (suit) {
             case CLUBS:
                 return "\u2663";
             case HEARTS:
@@ -39,7 +39,7 @@ public class Card {
     }
     
     public String rankAsString(int rank) {
-        switch(rank) {
+        switch (rank) {
             case 11: 
                 return "J";
             case 12:

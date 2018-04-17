@@ -14,7 +14,7 @@ import texasholdem.ui.text.TextUi;
 
 public class Main {
     
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("!!!WELCOME TO TEXAS HOLD 'EM!!!\n"
                 + "###############################");
         TextUi ui = new TextUi();

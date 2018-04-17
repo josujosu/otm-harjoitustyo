@@ -13,7 +13,7 @@ public class Player {
     
     private User user;
     private Deck hand;
-    private int bet;
+    private int bet; // The amount of money the player has bet in the game
     
     public Player(User user, Deck hand) {
         this.user = user;
@@ -22,33 +22,41 @@ public class Player {
     }
     
     // Returns the amount of money that will be added to the pot
-    public int call(int call) {
+    public int call(int largestBet) {
         int calledMoney;
-        if(call > this.user.getBalance()){
+        int call = largestBet - this.bet;
+        if (call > this.user.getBalance()) {
             calledMoney = this.user.getBalance();
             this.getUser().setBalance(0);
         } else {
             calledMoney = call;
             this.getUser().setBalance(this.getUser().getBalance() - call);
         }
+        this.bet += calledMoney;
         return calledMoney;
     }
     
     // Returns the amount of money needed for a call + the bet
-    public int raise(int raise, int call) {
-        int betMoney = this.call(call);
-        if(raise > this.user.getBalance()) {
+    public int raise(int raise, int largestBet) {
+        int betMoney = this.call(largestBet);
+        // If the player doesn't have money for the raise, they just call
+        if (raise > this.user.getBalance()) {
             return betMoney;
         } else {
             this.bet += raise;
-            this.getUser().setBalance(this.getUser().getBalance() - call);
+            this.getUser().setBalance(this.getUser().getBalance() - raise);
             return betMoney + raise;
         }
+    }
+    
+    public Action play(int largestBet) {
+        int additionalBet =  this.call(largestBet);
+        return new Action(Action.ActionType.CALL, additionalBet, 0);
     }
 
     @Override
     public String toString() {
-        return "User: " + this.user + "\n" + "bet: " + this.bet + "\n" + "Hand: " + this.hand;
+        return "User: " + this.user + ", " + "bet: " + this.bet + ", " + "Hand: " + this.hand;
     }
 
     /**
@@ -60,9 +68,9 @@ public class Player {
 
 
     /**
-     * @return the moneyBet
+     * @return the bet
      */
-    public int getMoneyBet() {
+    public int getBet() {
         return bet;
     }
 

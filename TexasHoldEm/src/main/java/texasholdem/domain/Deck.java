@@ -19,29 +19,30 @@ public class Deck {
     
     public Deck(List<Card>...params) {
         this.cards = new ArrayList<>();
-        for(List<Card> newCards : params) {
+        for (List<Card> newCards : params) {
             this.cards.addAll(newCards);
         }
     }
     
-    public Deck(){
+    public Deck() {
         this.cards = this.create52CardDeck();
     }
     
     
-    final ArrayList<Card> create52CardDeck(){
+    final ArrayList<Card> create52CardDeck() {
         ArrayList<Card> newDeck = new ArrayList<>();
         List<Card.Suit> suits = new ArrayList<>();
         suits.add(Card.Suit.HEARTS);
         suits.add(Card.Suit.DIAMONDS);
         suits.add(Card.Suit.CLUBS);
         suits.add(Card.Suit.SPADES);
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             Card.Suit suit = suits.get(i);
-            for(int rank = 2; rank < 15; rank++) {
+            for (int rank = 2; rank < 15; rank++) {
                 newDeck.add(new Card(suit, rank));
             }
         }
+        newDeck = this.shuffleDeck(newDeck);
         return newDeck;
     }
     
@@ -49,7 +50,7 @@ public class Deck {
     public ArrayList<Card> takeCards(int n) {
         ArrayList<Card> taken = new ArrayList<>();
         if (n <= this.cards.size()) {
-            for(int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) {
                 taken.add(this.cards.get(0));
                 this.cards.remove(0);
             }
@@ -61,8 +62,9 @@ public class Deck {
         this.cards.addAll(cards);
     }
     
-    public void shuffleDeck(){
-        Collections.shuffle(getCards());
+    public ArrayList<Card> shuffleDeck(ArrayList<Card> cards) {
+        Collections.shuffle(cards);
+        return cards;
     }
     
     @Override

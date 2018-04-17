@@ -25,7 +25,7 @@ public class StartTextScene implements TextScene{
             if(command.equals("1")){
                 return new CreateUserTextScene();
             } else if (command.equals("2")) {
-                return new PlayingScene();
+                return new PlayingTextScene();
             } else if (command.equals("x")){
                 return null;
             } else {

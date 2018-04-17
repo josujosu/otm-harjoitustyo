@@ -29,11 +29,11 @@ public class UserDao implements Dao<User, Integer> {
 
     @Override
     public User findOne(Integer key) throws SQLException {
-        List<User> User = this.db.queryAndCollect("SELECT * FROM User WHERE id = ?", new UserCollector(), key);
-        if (User.isEmpty()) {
+        List<User> user = this.db.queryAndCollect("SELECT * FROM User WHERE id = ?", new UserCollector(), key);
+        if (user.isEmpty()) {
             return null;
         } else {
-            return User.get(0);
+            return user.get(0);
         }
     }
 
@@ -44,8 +44,8 @@ public class UserDao implements Dao<User, Integer> {
 
     @Override
     public List<User> findAll() throws SQLException {
-        List<User> Users = this.db.queryAndCollect("SELECT * FROM User", new UserCollector());
-        return Users;
+        List<User> users = this.db.queryAndCollect("SELECT * FROM User", new UserCollector());
+        return users;
     }
 
     @Override

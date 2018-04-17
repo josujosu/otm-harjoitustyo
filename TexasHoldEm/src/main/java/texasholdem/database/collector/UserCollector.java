@@ -13,10 +13,10 @@ import texasholdem.domain.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserCollector implements Collector<User>{
+public class UserCollector implements Collector<User> {
     
     @Override
-    public User collect(ResultSet rs) throws SQLException{
+    public User collect(ResultSet rs) throws SQLException {
         return new User(rs.getInt("id"), rs.getString("username"), rs.getInt("balance"));
     }
     

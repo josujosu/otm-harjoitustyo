@@ -15,14 +15,14 @@ public class User {
     private String username;
     private int balance;
     
-    public User(int id, String username, int balance){
+    public User(int id, String username, int balance) {
         this.id = id;
         this.username = username;
         this.balance = balance;
     }
     
     @Override
-    public String toString(){
+    public String toString() {
         return "id: " + this.id + ", username: " + this.username + ", balance: " + this.balance;
     }
 
