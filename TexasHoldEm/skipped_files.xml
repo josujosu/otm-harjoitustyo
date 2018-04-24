@@ -11,4 +11,5 @@
     <suppress files="texasholdem.ui.text.StartTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.TextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.TextUi.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="texasholdem.ui.Main.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

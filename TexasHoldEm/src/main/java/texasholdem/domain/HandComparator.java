@@ -25,7 +25,6 @@ public class HandComparator {
         ArrayList<String> names = new ArrayList<>();
         names.addAll(map.keySet());
         best.add(names.get(0));
-        HashMap<String, PokerHand> hands = new HashMap<>();
         for (int i = 1; i < names.size(); i++) {
             int comparison = this.compare(new PokerHand(map.get(best.get(0))), new PokerHand(map.get(names.get(i))));
             if (comparison < 0) {
