@@ -11,7 +11,6 @@ Päivämäärä | Käytetty aika | Mitä tehty
 22.4. | 4 tuntia | Pokeikäsikoodaamista ja pelilogiikan koodaamista
 23.4. | 5 tuntia | Pokerikäsien tunnistaminen ja vertailu tehty
 24.4. | 3 tuntia | Pokerikäsien viimeistely ja tulostaulukon aloittaminen
-----------------
-  | Käytetty aika
- -|--------------
- Summa | 29 tuntia
+yht. | 29 tuntia | 
+
+
