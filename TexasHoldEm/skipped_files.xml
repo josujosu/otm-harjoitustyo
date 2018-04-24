@@ -6,6 +6,7 @@
 
 <suppressions>
     <suppress files="texasholdem.ui.text.CreateUserTextScene.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="texasholdem.ui.text.UserStatsTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.PlayingTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.StartTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.TextScene.java" checks="[a-zA-Z0-9]*"/>

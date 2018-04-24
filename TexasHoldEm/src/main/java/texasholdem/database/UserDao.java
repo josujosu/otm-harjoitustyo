@@ -53,4 +53,8 @@ public class UserDao implements Dao<User, Integer> {
         this.db.update("DELETE FROM User WHERE id = ?", key);
     }
 
+    public void addToBalance(Integer key, Integer amount) throws SQLException {
+        this.db.update("UPDATE User SET balance = balance + ? WHERE id =  ?", amount, key);
+    }
+
 }

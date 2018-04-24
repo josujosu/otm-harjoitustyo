@@ -32,7 +32,7 @@ public class Player {
             calledMoney = call;
             this.getUser().setBalance(this.getUser().getBalance() - call);
         }
-        this.bet += calledMoney;
+        this.setBet(this.bet + calledMoney);
         return calledMoney;
     }
     
@@ -43,7 +43,7 @@ public class Player {
         if (raise > this.user.getBalance()) {
             return betMoney;
         } else {
-            this.bet += raise;
+            this.setBet(this.bet + raise);
             this.getUser().setBalance(this.getUser().getBalance() - raise);
             return betMoney + raise;
         }
@@ -80,5 +80,20 @@ public class Player {
     public User getUser() {
         return user;
     }
+
+    /**
+     * @param hand the hand to set
+     */
+    public void setHand(Deck hand) {
+        this.hand = hand;
+    }
+
+    /**
+     * @param bet the bet to set
+     */
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+    
     
 }

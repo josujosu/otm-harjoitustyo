@@ -17,20 +17,24 @@ public class StartTextScene implements TextScene{
                     + "What do you want to do? \n"
                     + "1: Manage users\n"
                     + "2: Play\n"
+                    + "3: Chack user stats\n"
                     + "x: End program\n");
         while(true){
             System.out.print("> ");
             String command = scan.next();
-        
-            if(command.equals("1")){
-                return new CreateUserTextScene();
-            } else if (command.equals("2")) {
-                return new PlayingTextScene();
-            } else if (command.equals("x")){
-                return null;
-            } else {
-                System.out.println("Invalid command!");
-            }    
+            switch (command) {
+                case "1":
+                    return new CreateUserTextScene();
+                case "2":
+                    return new PlayingTextScene();
+                case "3":
+                    return new UserStatsTextScene();
+                case "x":
+                    return null;
+                default:
+                    System.out.println("not a command");
+                    break;
+            }  
         }        
     }
     

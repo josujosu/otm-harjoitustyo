@@ -1,4 +1,4 @@
-package texasholdem.main;
+package texasholdem.ui;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,10 +11,13 @@ package texasholdem.main;
  * @author josujosu
  */
 import texasholdem.ui.text.TextUi;
+import texasholdem.domain.*;
+import java.util.ArrayList;
 
 public class Main {
     
     public static void main(String[] args) {
+        
         System.out.println("!!!WELCOME TO TEXAS HOLD 'EM!!!\n"
                 + "###############################");
         TextUi ui = new TextUi();

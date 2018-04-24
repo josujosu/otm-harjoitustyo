@@ -15,6 +15,7 @@ import texasholdem.database.UserDao;
 import texasholdem.database.Database;
 import texasholdem.domain.User;
 import texasholdem.domain.Game;
+import texasholdem.domain.HandComparator;
 
 public class PlayingTextScene implements TextScene{
     
@@ -28,25 +29,37 @@ public class PlayingTextScene implements TextScene{
         Game newGame = new Game(playerUser, 8);
         String status = "";
         
-        status = this.playPreFlop(newGame, status);
-        status = this.play(newGame, status);
-        newGame.putCardsOnTable(3);
-        status = this.play(newGame, status);
-        newGame.putCardsOnTable(1);
-        status = this.play(newGame, status);
-        newGame.putCardsOnTable(1);
-        status = this.play(newGame, status);
+        while (true) {
+            status = this.playPreFlop(newGame, status);
+            status = this.play(newGame, status);
+            newGame.putCardsOnTable(3);
+            status = this.play(newGame, status);
+            newGame.putCardsOnTable(1);
+            status = this.play(newGame, status);
+            newGame.putCardsOnTable(1);
+            status = this.play(newGame, status);
+            newGame.playShowdown();
+            newGame.printPlayers();
+            newGame.initializeNextDeal();
+
+            System.out.print("New deal? 'y/n'");
+            String command = scan.next();
+            if (command.equals("n")) {
+                break;
+            }
+        }
         
-        return null;
+        
+        return new StartTextScene();
     }
     
     public String play(Game game, String status) {
-        while(!status.equals("NextRound")) {
-            if(status.equals("Player")) {
+        while(!(status.equals("NextRound") || status.equals("EndGame"))) {
+            if(status.equals("Player") && !game.playerHasFolded()) {
                 System.out.println(game.getPotAndTableString());
                 System.out.println(game.getHumanPlayer());
                 System.out.print("Actions: \n "
-                        + "Call, Raise\n"
+                        + "Call, Raise, Fold\n"
                         + "What will you do? ");
                 String command = scan.next();
                 switch(command) {
@@ -58,6 +71,9 @@ public class PlayingTextScene implements TextScene{
                         int raiseAmount = Integer.parseInt(scan.next());
                         status = game.playHuman(command, raiseAmount);
                         break;
+                    case "Fold":
+                        status = game.playHuman(command, 0);
+                        break;
                     default:
                         status = game.playHuman("Call", 0);
                         break;
@@ -66,9 +82,7 @@ public class PlayingTextScene implements TextScene{
                 status = game.playNext();
             }
         }
-        status = game.getFirstPlayerName();
-        game.setCurrentPlayer(0);
-        game.setLastRaiser(0);
+        status = game.initializeForNextRound();
         return status;
     }
     
