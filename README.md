@@ -16,7 +16,7 @@ Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. 
 
 Ohjelman voi ajaa komentoriviltä komennolla
 
-    mvn compile exec:java -Dexec.mainClass=texasholdem.main.Main
+    mvn compile exec:java -Dexec.mainClass=texasholdem.ui.Main
 
 ### Testaus
 
