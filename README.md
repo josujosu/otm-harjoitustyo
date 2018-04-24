@@ -2,6 +2,10 @@
 
 Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. Käyttäjä voi luoda sovellukseen tunnuksen, jonka kautta voi tarkastella erinäisiä pelattuihin peleihin liittyviä tilastoja.
 
+## Julkaisut
+
+[Ensimmäinen julkaisu](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko5)
+
 ## Dokumentaatio
 
 [Työaikakirjanpito](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
