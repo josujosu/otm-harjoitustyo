@@ -2,9 +2,9 @@
 
 Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. Käyttäjä voi luoda sovellukseen tunnuksen, jonka kautta voi tarkastella erinäisiä pelattuihin peleihin liittyviä tilastoja.
 
-## Julkaisut
+## Releaset
 
-[Ensimmäinen julkaisu](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko5)
+[Viikko 5](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko5)
 
 ## Dokumentaatio
 
@@ -21,6 +21,14 @@ Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. 
 Ohjelman voi ajaa komentoriviltä komennolla
 
     mvn compile exec:java -Dexec.mainClass=texasholdem.ui.Main
+    
+### Suoritettavan jarin generointi
+
+Jarin voi generoida suorittamalla komentorivillä komennon
+
+    mvn package
+    
+Suoreitettava jar-tiedosto generoituu hakemistoon *target* nimellä TexasHoldEm-1.0-SNAPSHOT.jar
 
 ### Testaus
 
