@@ -191,7 +191,7 @@ public class HandComparator {
     public int compareHighestRankFromNuberOfCards(PokerHand hand1, PokerHand hand2, int n) {
         int own = this.getHighestRankFromNumberOfCards(hand1.getRanksInHand(), n);
         int other = this.getHighestRankFromNumberOfCards(hand2.getRanksInHand(), n);
-        if(own - other == 0) {
+        if (own - other == 0) {
             this.excluded.add(own);
             this.excluded.add(other);
             System.out.println(this.excluded);
@@ -204,7 +204,7 @@ public class HandComparator {
         if (comparison != 0) {
             return comparison;
         } else {
-            return this.compareHigh(hand1, hand2, 5-n);
+            return this.compareHigh(hand1, hand2, 5 - n);
         }
     }
     
@@ -217,7 +217,7 @@ public class HandComparator {
         if (comparison != 0) {
             return comparison;
         }
-        return this.compareHigh(hand1, hand2, 5-n1-n2);
+        return this.compareHigh(hand1, hand2, 5 - n1 - n2);
     }
 
     // Allows you to get eg. rank of pair in a hand from rank array, with exclusion

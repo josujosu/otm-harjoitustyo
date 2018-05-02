@@ -34,7 +34,7 @@ public class Deck {
      * a standard deck in a random order. The cards are listed as Card objects.
      * @return An ArrayList containing all of the 52 cards as Card objects
      */
-    final ArrayList<Card> create52CardDeck() {
+    public ArrayList<Card> create52CardDeck() {
         ArrayList<Card> newDeck = new ArrayList<>();
         List<Card.Suit> suits = new ArrayList<>();
         suits.add(Card.Suit.HEARTS);

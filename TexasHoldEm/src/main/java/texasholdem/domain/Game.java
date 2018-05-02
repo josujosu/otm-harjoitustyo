@@ -45,18 +45,18 @@ public class Game {
         this.playerOrder = this.createPlayerOrder();
     }
 
-    final HashMap<String, Player> createPlayers(User playerUser, int n, Deck deck) {
+    public HashMap<String, Player> createPlayers(User playerUser, int n, Deck deck) {
         HashMap<String, Player> newPlayers = new HashMap<>();
-        Deck hand = new Deck(this.deck.takeCards(2));
+        Deck hand = new Deck(this.getDeck().takeCards(2));
         newPlayers.put("Player", new Player(playerUser, hand));
         for (int i = 1; i < n; i++) {
-            hand = new Deck(this.deck.takeCards(2));
+            hand = new Deck(this.getDeck().takeCards(2));
             newPlayers.put("CPU" + i, new Player(new User(i, "CPU" + i, 4000), hand));
         }
         return newPlayers;
     }
 
-    final ArrayList<String> createPlayerOrder() {
+    public ArrayList<String> createPlayerOrder() {
         ArrayList<String> newPlayerOrder = new ArrayList<>();
         for (String player : this.players.keySet()) {
             newPlayerOrder.add(player);
@@ -66,38 +66,38 @@ public class Game {
     }
 
     public void putCardsOnTable(int n) {
-        this.getTable().addCards(this.deck.takeCards(n));
+        this.getTable().addCards(this.getDeck().takeCards(n));
     }
 
     public String playBlinds() {
-        this.pot += this.players.get(this.playerOrder.get(this.currentPlayer)).raise(this.smallBlind, 0);
+        this.pot += this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).raise(this.smallBlind, 0);
         this.nextPlayer();
-        this.pot += this.players.get(this.playerOrder.get(this.currentPlayer)).raise(this.bigBlind, 0);
+        this.pot += this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).raise(this.bigBlind, 0);
         this.nextPlayer();
-        this.largestBet = this.bigBlind;
-        this.setLastRaiser(this.currentPlayer);
-        this.setCurrentPlayer(this.currentPlayer);
-        return this.playerOrder.get(this.currentPlayer);
+        this.setLargestBet(this.bigBlind);
+        this.setLastRaiser(this.getCurrentPlayer());
+        this.setCurrentPlayer(this.getCurrentPlayer());
+        return this.getPlayerOrder().get(this.getCurrentPlayer());
     }
 
     public String playNext() {
         if (!this.foldedPlayers.contains(this.playerOrder.get(this.currentPlayer))) {
-            Action action = this.players.get(this.playerOrder.get(this.currentPlayer)).play(largestBet, this.table);
+            Action action = this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).play(largestBet, this.table);
             switch (action.getType()) {
                 case CALL:
                     this.pot += action.getCall();
                     break;
                 case RAISE:
                     this.pot += action.getCall() + action.getRaise();
-                    this.setLastRaiser(this.currentPlayer);
-                    this.largestBet += action.getRaise();
+                    this.setLastRaiser(this.getCurrentPlayer());
+                    this.setLargestBet(this.largestBet + action.getRaise());
                     break;
                 case FOLD:
-                    this.foldedPlayers.add(this.playerOrder.get(this.currentPlayer));
+                    this.getFoldedPlayers().add(this.getPlayerOrder().get(this.getCurrentPlayer()));
                     break;
             }
             this.latest = action;
-            this.lastActor = this.playerOrder.get(this.currentPlayer);
+            this.lastActor = this.getPlayerOrder().get(this.getCurrentPlayer());
         }
         this.nextPlayer();
         return this.returnGameState();
@@ -121,11 +121,11 @@ public class Game {
                 break;
             case "Raise":
                 this.pot += this.players.get("Player").raise(raise, largestBet);
-                this.largestBet += raise;
-                this.setLastRaiser(this.currentPlayer);
+                this.setLargestBet(this.largestBet + raise);
+                this.setLastRaiser(this.getCurrentPlayer());
                 break;
             case "Fold":
-                this.foldedPlayers.add("Player");
+                this.getFoldedPlayers().add("Player");
                 break;
             default:
                 this.pot += this.players.get("Player").call(largestBet);
@@ -136,7 +136,7 @@ public class Game {
     public String playShowdown() {
         this.addTableCardsToPlayerDecks();
         ArrayList<Player> winners = this.getPlayersWithBestHand();
-        int potFraction = this.pot / winners.size();
+        int potFraction = this.getPot() / winners.size();
         for (Player player : winners) {
             player.getUser().addToBalance(potFraction);
         }
@@ -183,18 +183,18 @@ public class Game {
     // Returns "GameState" ie. the label of the next player or "NextRound" for 
     // when the game should enter the next stage.
     public String returnGameState() {
-        if (this.foldedPlayers.size() == this.playerOrder.size() - 1) {
+        if (this.getFoldedPlayers().size() == this.getPlayerOrder().size() - 1) {
             return "EndGame";
         }
-        if (this.currentPlayer == this.lastRaiser) {
+        if (this.getCurrentPlayer() == this.lastRaiser) {
             return "NextRound";
         } else {
-            return this.playerOrder.get(this.currentPlayer);
+            return this.getPlayerOrder().get(this.getCurrentPlayer());
         }
     }
 
     public void setCurrentPlayerToFirstNotFolded() {
-        for (int i = 0; i < this.playerOrder.size(); i++) {
+        for (int i = 0; i < this.getPlayerOrder().size(); i++) {
             if (!this.foldedPlayers.contains(this.playerOrder.get(i))) {
                 this.currentPlayer = i;
             }
@@ -203,20 +203,20 @@ public class Game {
 
     public String initializeForNextRound() {
         this.setCurrentPlayerToFirstNotFolded();
-        this.lastRaiser = this.currentPlayer; //This way the game will go through the whole round
-        if (this.foldedPlayers.size() == this.playerOrder.size() - 1) {
+        this.lastRaiser = this.getCurrentPlayer(); //This way the game will go through the whole round
+        if (this.getFoldedPlayers().size() == this.getPlayerOrder().size() - 1) {
             return "EndGame";
         } else {
-            return this.playerOrder.get(this.currentPlayer);
+            return this.getPlayerOrder().get(this.getCurrentPlayer());
         }
     }
 
     public void initializeNextDeal() {
         this.removePlayersWithNoMoney();
-        this.foldedPlayers.clear();
-        Collections.rotate(playerOrder, -1);
+        this.getFoldedPlayers().clear();
+        Collections.rotate(getPlayerOrder(), -1);
         this.pot = 0;
-        this.largestBet = 0;
+        this.setLargestBet(0);
         this.currentPlayer = 0;
         this.deck = new Deck();
         this.resetPlayers();
@@ -225,14 +225,14 @@ public class Game {
 
     public void resetPlayers() {
         for (Player player : this.players.values()) {
-            player.setHand(new Deck(this.deck.takeCards(2)));
+            player.setHand(new Deck(this.getDeck().takeCards(2)));
             player.setBet(0);
         }
     }
     
     public void removePlayersWithNoMoney() {
-        Iterator<String> iter = this.playerOrder.iterator();
-        while(iter.hasNext()) {
+        Iterator<String> iter = this.getPlayerOrder().iterator();
+        while (iter.hasNext()) {
             String name = iter.next();
             if (this.players.get(name).getUser().getBalance() <= 0) {
                 iter.remove();
@@ -242,14 +242,14 @@ public class Game {
     }
 
     public void printPlayers() {
-        for (String name : this.playerOrder) {
+        for (String name : this.getPlayerOrder()) {
             System.out.println(this.players.get(name));
         }
     }
     
     public void printNonFoldedPlayers() {
-        for (String name : this.playerOrder) {
-            if(!this.foldedPlayers.contains(name)) {
+        for (String name : this.getPlayerOrder()) {
+            if (!this.foldedPlayers.contains(name)) {
                 System.out.println(this.players.get(name));
             }
         } 
@@ -257,7 +257,7 @@ public class Game {
 
     public void nextPlayer() {
         this.currentPlayer++;
-        if (this.currentPlayer >= this.playerOrder.size()) {
+        if (this.getCurrentPlayer() >= this.getPlayerOrder().size()) {
             this.setCurrentPlayer(0);
         }
         /*if (this.foldedPlayers.contains(this.playerOrder.get(this.currentPlayer))) {
@@ -266,11 +266,11 @@ public class Game {
     }
 
     public boolean hasFolded(String name) {
-        return this.foldedPlayers.contains(name);
+        return this.getFoldedPlayers().contains(name);
     }
     
     public boolean hasEnoughPlayersForPlaying() {
-        return this.playerOrder.size() > 1;
+        return this.getPlayerOrder().size() > 1;
     }
     
     public boolean playerUserCanBeUsed(User user) {
@@ -278,7 +278,7 @@ public class Game {
     }
 
     public String getFirstPlayerName() {
-        return this.playerOrder.get(0);
+        return this.getPlayerOrder().get(0);
     }
 
     public Player getHumanPlayer() {
@@ -286,21 +286,21 @@ public class Game {
     }
 
     public String getPotAndTableString() {
-        return "Pot: " + this.pot + " Table: " + this.getTable();
+        return "Pot: " + this.getPot() + " Table: " + this.getTable();
     }
     
     public String currentPlayerName() {
-        return this.playerOrder.get(this.currentPlayer);
+        return this.getPlayerOrder().get(this.getCurrentPlayer());
     }
     
     public String playerInRelationToCurrent(int rel) {
-        int i = this.currentPlayer + rel;
+        int i = this.getCurrentPlayer() + rel;
         if (i < 0) {
-            i += this.playerOrder.size();
-        } else if (i >= this.playerOrder.size()) {
-            i -= this.playerOrder.size();
+            i += this.getPlayerOrder().size();
+        } else if (i >= this.getPlayerOrder().size()) {
+            i -= this.getPlayerOrder().size();
         }
-        return this.playerOrder.get(i);
+        return this.getPlayerOrder().get(i);
     }
 
     @Override
@@ -342,5 +342,49 @@ public class Game {
     public String getLastActor() {
         return lastActor;
     }
+
+    /**
+     * @return the playerOrder
+     */
+    public ArrayList<String> getPlayerOrder() {
+        return playerOrder;
+    }
+
+    /**
+     * @return the deck
+     */
+    public Deck getDeck() {
+        return deck;
+    }
+
+    /**
+     * @return the pot
+     */
+    public int getPot() {
+        return pot;
+    }
+
+    /**
+     * @return the currentPlayer
+     */
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * @return the foldedPlayers
+     */
+    public ArrayList<String> getFoldedPlayers() {
+        return foldedPlayers;
+    }
+
+    /**
+     * @param largestBet the largestBet to set
+     */
+    public void setLargestBet(int largestBet) {
+        this.largestBet = largestBet;
+    }
+    
+    
 
 }

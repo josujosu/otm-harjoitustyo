@@ -66,7 +66,7 @@ public class User {
      */
     public List<Integer> getBalanceHistory() {
         List<Integer> balances = new ArrayList<>();
-        for(Result result : this.getResultsOfUser()) {
+        for (Result result : this.getResultsOfUser()) {
             balances.add(result.getOldBalance());
         }
         balances.add(this.balance);
@@ -80,7 +80,7 @@ public class User {
      */
     public List<Integer> getWinsAndLosses() {
         List<Integer> winnings = new ArrayList<>();
-        for(Result result : this.getResultsOfUser()) {
+        for (Result result : this.getResultsOfUser()) {
             winnings.add(result.getBalanceChange());
         }
         return winnings;
