@@ -16,7 +16,13 @@ Seuraava luokka/pakkauskaavio kuvaa jokaisen sovelluksessa esiintyvän, mukaanlu
 
 ### Pelin kulku
 
-Käyttöliittymä käyttää *Game*-luokan, joka pitää kirjaa pelitilanteesta, sisältämiä metodeja pelin eri vaiheiden esittämiseen. Metodit, kuten *playNext()*, *playHuman()* ja *playShowdown()* suorittavat tietyn pelin vaiheen, jonka jälkeen käyttöliittymä voi näyttää käyttäjälle seuraavan pelitilanteen. Koska *Game* pitää huolta pelin kulusta, liittyvät siihen oliot *Player* ja *Deck*, joista *Player* kuvastaa pelissä mukava olevaa pelaajaa, oli hän sitten ihmis- tai tietokonepelaaja ja *Deck* kuvaa korttipakkaa, joka sisältää yksittäisiä kortteja kuvaavia *Card*-olioita.
+Pelin kulku perustuu *Game*-luokan ja käyttöliittymän väliseen yhteistyöhön. Käyttöliittymä ottaa vastaan käyttäjän komentoja, ja välittää niiden kautta tehtäviä *Game*-oliolle, joka ylläpitää ja on perillä pelin tapahtumista. Pelin ylläpitäminen tapahtuu pääosin *Player*-olioiden ja *Deck*-olioiden välityksellä. *Player* pitää sisällään tiedot tietystä pelin pelaajasta ja *Deck* sisältää listan tiettyyn pakkaan sidotuista korteista, tai *Card*-olioista.
+
+Riippuen kutsutusta metodista, *Player*-olio voi tehdä pokeriin liittyviä toimintoja (kuten *fold* ja *raise*) vastaamalla annettuun komentoon, tai valitsemalla sattumanvaraisesti *ComputerAI*-luokan määrittelemien metodien avulla. Tehdyn toiminnon kapseloi "Action"-oliot.
+
+Pelaajien käsien määrittely tapahtuu *HandComparator*-luokan ja *PokerHand*-olioiden avulla. *HandComparator* määrittelee metodit, joiden avulla voi verrata *PokerHand*-olioiden *Deck*-olioista määrittelemiä pokerikäsiä. Pelaajien toimintojen jälkeen *Game*-olio käyttää kyseistä luokka parhaimman käden, ja täten parhaimman pelaajan, löytämiseksi.
+
+Jokaiseen *Player*-olioon liittyy myös *User*-olio. *User* kapsuloi tiettyn pelaajan tekemän käyttäjän sen hetkisen saldo-tilanteen. Käyttäjien saldoihin tapahtuneet muutokset tallennetaan *Result*-olioina.
 
 ## Päätoiminnallisuudet
 
