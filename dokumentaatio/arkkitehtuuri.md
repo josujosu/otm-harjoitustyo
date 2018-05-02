@@ -18,7 +18,7 @@ Seuraava luokka/pakkauskaavio kuvaa jokaisen sovelluksessa esiintyvän, mukaanlu
 
 Pelin kulku perustuu *Game*-luokan ja käyttöliittymän väliseen yhteistyöhön. Käyttöliittymä ottaa vastaan käyttäjän komentoja, ja välittää niiden kautta tehtäviä *Game*-oliolle, joka ylläpitää ja on perillä pelin tapahtumista. Pelin ylläpitäminen tapahtuu pääosin *Player*-olioiden ja *Deck*-olioiden välityksellä. *Player* pitää sisällään tiedot tietystä pelin pelaajasta ja *Deck* sisältää listan tiettyyn pakkaan sidotuista korteista, tai *Card*-olioista.
 
-Riippuen kutsutusta metodista, *Player*-olio voi tehdä pokeriin liittyviä toimintoja (kuten *fold* ja *raise*) vastaamalla annettuun komentoon, tai valitsemalla sattumanvaraisesti *ComputerAI*-luokan määrittelemien metodien avulla. Tehdyn toiminnon kapseloi "Action"-oliot.
+Riippuen kutsutusta metodista, *Player*-olio voi tehdä pokeriin liittyviä toimintoja (kuten *fold* ja *raise*) vastaamalla annettuun komentoon, tai valitsemalla sattumanvaraisesti *ComputerAI*-luokan määrittelemien metodien avulla. Tehdyn toiminnon kapseloi *Action*-oliot.
 
 Pelaajien käsien määrittely tapahtuu *HandComparator*-luokan ja *PokerHand*-olioiden avulla. *HandComparator* määrittelee metodit, joiden avulla voi verrata *PokerHand*-olioiden *Deck*-olioista määrittelemiä pokerikäsiä. Pelaajien toimintojen jälkeen *Game*-olio käyttää kyseistä luokka parhaimman käden, ja täten parhaimman pelaajan, löytämiseksi.
 
