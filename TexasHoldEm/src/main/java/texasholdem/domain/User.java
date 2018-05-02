@@ -62,7 +62,7 @@ public class User {
     /**
      * A method for extracting a list of older balances connected to the user in question
      * from the appointed database.
-     * @return A List<Integer> containing all of the balance history
+     * @return A List containing all of the balance history
      */
     public List<Integer> getBalanceHistory() {
         List<Integer> balances = new ArrayList<>();
@@ -76,7 +76,7 @@ public class User {
     /**
      * A method for extracting a list of changes to the balance of the user in
      * question from the appointed database.
-     * @return A List<Integer> containing all of the changes to the balance
+     * @return A List containing all of the changes to the balance
      */
     public List<Integer> getWinsAndLosses() {
         List<Integer> winnings = new ArrayList<>();
@@ -89,7 +89,7 @@ public class User {
     /**
      * A method for extracting all of the results connected to the user in question
      * as a List of Result objects from the appointed database.
-     * @return A List<Resut> containing all of the results
+     * @return A List containing all of the results
      */
     public List<Result> getResultsOfUser() {
         List<Result> results = new ArrayList<>();

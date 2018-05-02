@@ -100,18 +100,7 @@ public class HandComparator {
         }
     }
 
-    /**
-     * A method for comparing two hands of the type "four of a kind", where the hands have
-     * four cards of the same rank. Checks if the four cards have a higher rank in one
-     * of the hands, if not checks which hand has a better high card.
-     * @param hand1 first of the hands to be compared
-     * @param hand2 second of the hands to be compared
-     * @param n
-     * @param excluded
-     * @return A positive value if hand1 is better, negative if hand2 and 0 if they
-     * are equally good
-     */
-    /*
+/*
     public int compareFourOfAKind(PokerHand hand1, PokerHand hand2) {
         int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 4, new ArrayList<>());
         if (comparison == 0) {
