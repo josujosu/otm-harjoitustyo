@@ -10,7 +10,9 @@ package texasholdem.ui;
  *
  * @author josujosu
  */
+import javafx.application.Application;
 import texasholdem.ui.text.TextUi;
+import texasholdem.ui.graphical.TexasHoldEmUI;
 import texasholdem.domain.*;
 import java.util.ArrayList;
 
@@ -18,10 +20,12 @@ public class Main {
     
     public static void main(String[] args) {
         
+        //TexasHoldEmUI.launch(TexasHoldEmUI.class);
+        
         System.out.println("!!!WELCOME TO TEXAS HOLD 'EM!!!\n"
                 + "###############################");
-        TextUi ui = new TextUi();
-        ui.run();
+        TextUi tui = new TextUi();
+        tui.run();
         System.out.println("SEE YOU SOON!");
     }
     

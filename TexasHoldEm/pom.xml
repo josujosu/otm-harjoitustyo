@@ -19,6 +19,8 @@
                 <configuration>
                     <excludes>
                         <exclude>texasholdem/ui/text/*</exclude>
+                        <exclude>texasholdem/ui/*</exclude>
+                        <exclude>texasholdem/ui/graphical/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

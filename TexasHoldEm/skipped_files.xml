@@ -5,11 +5,13 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
+    <suppress files="texasholdem.ui.*" checks="[a-zA-Z0-9]*"/>
+    <suppress files="texasholdem.ui.graphical.TexasHoldEmUI.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.CreateUserTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.UserStatsTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.PlayingTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.StartTextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.TextScene.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="texasholdem.ui.text.TextUi.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="texasholdem.ui.Main.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="texasholdem.ui.Main.java" checks="[a-zA-Z0-9]*"/>  
 </suppressions>

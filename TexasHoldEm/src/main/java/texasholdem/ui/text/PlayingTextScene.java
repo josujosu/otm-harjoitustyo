@@ -16,6 +16,7 @@ import texasholdem.database.Database;
 import texasholdem.domain.User;
 import texasholdem.domain.Game;
 import texasholdem.domain.HandComparator;
+import texasholdem.domain.Player;
 
 public class PlayingTextScene implements TextScene{
     
@@ -23,12 +24,17 @@ public class PlayingTextScene implements TextScene{
     @Override
     public TextScene run() {
         this.listAllUsers();
-        System.out.print("Choose user: ");
-        Integer userId = Integer.parseInt(scan.next());
-        User playerUser = this.getUserFromDb(userId);
-        Game newGame = new Game(playerUser, 8);
+        Game newGame;
         String status = "";
         
+        System.out.print("Choose user: ");
+        Integer userId = Integer.parseInt(scan.next());            
+        User playerUser = this.getUserFromDb(userId);
+        newGame = new Game(playerUser, 8);           
+        if(!newGame.playerUserCanBeUsed(playerUser)) {
+            System.out.println("User doesn't have enough money to be used");
+            return new StartTextScene();
+        }      
         while (true) {
             status = this.playPreFlop(newGame, status);
             status = this.play(newGame, status);
@@ -39,8 +45,26 @@ public class PlayingTextScene implements TextScene{
             newGame.putCardsOnTable(1);
             status = this.play(newGame, status);
             newGame.playShowdown();
-            newGame.printPlayers();
+            
+            System.out.println("WINNER:");
+            for (Player p : newGame.getPlayersWithBestHand()) {
+                System.out.println(p);
+            }
+            
+            System.out.println("REMAINING PLAYERS:");
+            newGame.printNonFoldedPlayers();
+            
             newGame.initializeNextDeal();
+            
+            if(!newGame.hasEnoughPlayersForPlaying()) {
+                System.out.println("Not enough players for a game!");
+                return new PlayingTextScene();
+            }
+            
+            if (!newGame.playerUserCanBeUsed(newGame.getHumanPlayer().getUser())) {
+                System.out.println("You don't have enough money to play!");
+                return new PlayingTextScene();
+            }
 
             System.out.print("New deal? 'y/n'");
             String command = scan.next();
@@ -55,7 +79,7 @@ public class PlayingTextScene implements TextScene{
     
     public String play(Game game, String status) {
         while(!(status.equals("NextRound") || status.equals("EndGame"))) {
-            if(status.equals("Player") && !game.playerHasFolded()) {
+            if(status.equals("Player") && !game.hasFolded("Player")) {
                 System.out.println(game.getPotAndTableString());
                 System.out.println(game.getHumanPlayer());
                 System.out.print("Actions: \n "
@@ -80,6 +104,9 @@ public class PlayingTextScene implements TextScene{
                 }
             } else {
                 status = game.playNext();
+                if (game.playerInRelationToCurrent(-1).equals(game.getLastActor())) {
+                    System.out.println(game.getLastActor() + ": " + game.getLatest().toStringTextUIFormatted());                    
+                }
             }
         }
         status = game.initializeForNextRound();

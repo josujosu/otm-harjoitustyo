@@ -39,19 +39,32 @@ public class Player {
     // Returns the amount of money needed for a call + the bet
     public int raise(int raise, int largestBet) {
         int betMoney = this.call(largestBet);
-        // If the player doesn't have money for the raise, they just call
+        // If the player doesn't have money for the raise, they go all in
         if (raise > this.user.getBalance()) {
-            return betMoney;
-        } else {
-            this.setBet(this.bet + raise);
-            this.getUser().setBalance(this.getUser().getBalance() - raise);
-            return betMoney + raise;
+            raise = this.user.getBalance();
         }
+        this.setBet(this.bet + raise);
+        this.getUser().setBalance(this.getUser().getBalance() - raise);
+        return betMoney + raise;
     }
     
-    public Action play(int largestBet) {
-        int additionalBet =  this.call(largestBet);
-        return new Action(Action.ActionType.CALL, additionalBet, 0);
+    public Action play(int largestBet, Deck table) {
+        Deck currentCards = new Deck(this.hand.getCards());
+        currentCards.addCards(table.getCards());
+        Action action = new ComputerAI().makeAction(currentCards, largestBet);
+        this.act(action);
+        return action;
+    }
+    
+    public void act(Action a) {
+        switch (a.getType()) {
+            case CALL:
+                this.call(a.getCall());
+                break;
+            case RAISE:
+                this.raise(a.getRaise(), a.getCall());
+                break;
+        }
     }
 
     @Override

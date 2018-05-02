@@ -52,4 +52,8 @@ public class ResultDao implements Dao<Result, Integer> {
         List<Result> results = this.db.queryAndCollect("SELECT * FROM Result WHERE userId = ?", new ResultCollector(), key);
         return results;
     }
+    
+    public void deleteAllWithSameUserId(Integer key) throws SQLException {
+        this.db.update("DELETE FROM Result WHERE userId = ?", key);
+    }
 }

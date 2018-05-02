@@ -72,11 +72,13 @@ public class CreateUserTextScene implements TextScene{
     
     public void removeUser(){
         UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
+        ResultDao rDao = new ResultDao(new Database("jdbc:sqlite:THE.db"));
         System.out.print("Give the id of the user you want to remove: ");
         String command = scan.next();
         Integer id = Integer.parseInt(command);
         try{
             dao.delete(id);
+            rDao.deleteAllWithSameUserId(id);
         } catch (Exception e){
             System.out.println(e);
         }

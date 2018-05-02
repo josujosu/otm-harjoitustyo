@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- *
+ * A class depicting the result of a deal
  * @author josujosu
  */
 public class Result {
@@ -28,10 +28,6 @@ public class Result {
         this.userId = userId;
         this.oldBalance = oldBalance;
         this.balanceChange = balanceChange;
-    }
-    
-    public void addResult(User user, int amount) {
-        
     }
 
     /**

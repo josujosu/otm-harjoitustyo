@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- *
+ * A class depicting a deck of cards
  * @author josujosu
  */
 import java.util.ArrayList;
@@ -29,6 +29,11 @@ public class Deck {
     }
     
     
+    /**
+     * A method that creates an ArrayList containing all the 52 playing cards of
+     * a standard deck in a random order. The cards are listed as Card objects.
+     * @return An ArrayList containing all of the 52 cards as Card objects
+     */
     final ArrayList<Card> create52CardDeck() {
         ArrayList<Card> newDeck = new ArrayList<>();
         List<Card.Suit> suits = new ArrayList<>();
@@ -42,11 +47,16 @@ public class Deck {
                 newDeck.add(new Card(suit, rank));
             }
         }
-        newDeck = this.shuffleDeck(newDeck);
+        Collections.shuffle(newDeck);
         return newDeck;
     }
     
-    
+    /**
+     * A method that depicts the act of taking cards from a deck. The cards taken are 
+     * removed from the deck.
+     * @param n The amount of cards that will be taken from the deck
+     * @return An ArrayList containing all the taken cards as Card objects
+     */
     public ArrayList<Card> takeCards(int n) {
         ArrayList<Card> taken = new ArrayList<>();
         if (n <= this.cards.size()) {
@@ -58,13 +68,13 @@ public class Deck {
         return taken;
     }
     
+    /**
+     * A method that adds cards to the deck
+     * @param cards The cards to be added to the deck as an ArrayList of Card
+     * objects
+     */
     public void addCards(ArrayList<Card> cards) {
         this.cards.addAll(cards);
-    }
-    
-    public ArrayList<Card> shuffleDeck(ArrayList<Card> cards) {
-        Collections.shuffle(cards);
-        return cards;
     }
     
     @Override

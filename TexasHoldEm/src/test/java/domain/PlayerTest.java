@@ -22,6 +22,7 @@ import texasholdem.domain.Deck;
 import texasholdem.domain.Card;
 import texasholdem.domain.User;
 import java.util.ArrayList;
+import texasholdem.domain.Action;
 
 public class PlayerTest {
    
@@ -83,9 +84,9 @@ public class PlayerTest {
     }
     
     @Test
-    public void raisingWithNotEnoughMoneyReturnsOnlyMoneyNeededForCall() {
+    public void raisingWithNotEnoughMoneyReturnsAllOfBalance() {
         String returnValue = Integer.toString(player.raise(600, 1500));
-        assertEquals("1500", returnValue);
+        assertEquals("2000", returnValue);
     }
     
     @Test
@@ -99,6 +100,24 @@ public class PlayerTest {
         player.raise(100, 1500);
         String bet = Integer.toString(player.getBet());
         assertEquals("1600", bet);
+    }
+    
+    @Test
+    public void playReturnsAnAction() {
+        Action a = player.play(100, this.deck);
+        assertTrue(a != null);
+    }
+    
+    @Test
+    public void actMakesThePlayerCallWhenACallActionIsGivenAsAParameter() {
+        this.player.act(new Action(Action.ActionType.CALL, 100, 0));
+        assertEquals(100, player.getBet());
+    }
+    
+    @Test
+    public void actMakesThePlayerRaiseWhenARaiseActionIsGivenAsAParameter() {
+        this.player.act(new Action(Action.ActionType.RAISE, 100, 10));
+        assertEquals(110, this.player.getBet());
     }
     
 }

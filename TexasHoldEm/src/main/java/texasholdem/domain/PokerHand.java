@@ -28,25 +28,12 @@ public class PokerHand {
         this.create5CardHandFromADeck(deck);
     }
 
-    // Allows you to get eg. rank of pair in a hand from rank array, with exclusion
-    // of a certain rank
-    public int getHighestRankFromNumberOfCards(ArrayList<Integer> ranks, int n, ArrayList<Integer> excluded) {
-        int rank = 0;
-        for (int i = ranks.size() - 1; i >= 0; i--) {
-            if (ranks.get(i) == n && !excluded.contains(i)) {
-                rank = i;
-            }
-        }
-        return rank;
-    }
 
     final public void create5CardHandFromADeck(Deck deck) {
         ArrayList<Card> cards = deck.getCards();
         HashMap<Card.Suit, Integer> suits = this.suitMapFromCardArray(cards);
         ArrayList<Integer> ranks = this.rankArrayFromCardArray(cards);
-        if (this.checkFlushes(cards, ranks, suits)) {
-            return;
-        } else {
+        if (!this.checkFlushes(cards, ranks, suits)) {
             this.checkNonFlushes(cards, ranks);
         }
 
@@ -167,7 +154,7 @@ public class PokerHand {
     public int highestInStraight(ArrayList<Integer> ranks) {
         int highest = -1;
         for (int i = ranks.size() - 1; i >= 4; i--) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 5; j++) {
                 if (ranks.get(i - j) == 0) {
                     highest = -1;
                     break;
@@ -214,8 +201,8 @@ public class PokerHand {
     public ArrayList<Integer> ranksOfHighCards(ArrayList<Integer> ranks, int n, ArrayList<Integer> excludedRanks) {
         ArrayList<Integer> highRanks = new ArrayList<>();
         for (int i = ranks.size() - 1; i >= 1; i--) {
-            if (ranks.get(i) != 0 && !excludedRanks.contains(ranks.get(i))) {
-                highRanks.add(ranks.get(i));
+            if ((ranks.get(i) != 0) && (!excludedRanks.contains(ranks.get(i)))) {
+                highRanks.add(i);
             }
             if (highRanks.size() >= n) {
                 break;

@@ -42,7 +42,7 @@ public class PokerHandTest {
     
     @Before
     public void setUp() {
-        ArrayList<Card> cards = new ArrayList<>();
+        cards = new ArrayList<>();
         cards.add(new Card(Card.Suit.CLUBS, 3));
         cards.add(new Card(Card.Suit.DIAMONDS, 4));
         cards.add(new Card(Card.Suit.CLUBS, 9));
@@ -67,6 +67,19 @@ public class PokerHandTest {
     //
     // @Test
     // public void hello() {}
+    @Test
+    public void rankArrayFromCardArrayCreatesTheRightKindOfArray() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(Card.Suit.HEARTS, 10));
+        cards.add(new Card(Card.Suit.HEARTS, 8));
+        cards.add(new Card(Card.Suit.HEARTS, 10));
+        cards.add(new Card(Card.Suit.HEARTS, 2));
+        this.emptyRanks.set(9, 2);
+        this.emptyRanks.set(7, 1);
+        this.emptyRanks.set(1, 1);
+        assertEquals(this.emptyRanks, new PokerHand(new Deck(cards)).rankArrayFromCardArray(cards));
+    }
+    
     @Test
     public void highestInStraightReturnsRightValueWhenGivenArrayHasStraight() {
         this.emptyRanks.set(11, 1);

@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- *
+ * Class used for representing a card in Texas Hold'Em
  * @author josujosu
  */
 public class Card {
@@ -23,6 +23,11 @@ public class Card {
         this.rank = rank;
     }
     
+    /**
+     * Converts Card.Suit to string
+     * @param suit the suit that is to be converted
+     * @return the unicode for a symbol of the corresponding suit
+     */
     public String suitAsString(Card.Suit suit) {
         switch (suit) {
             case CLUBS:
@@ -38,6 +43,12 @@ public class Card {
         }
     }
     
+    /**
+     * Converts a card rank from an integer to String
+     * @param rank a rank as integer
+     * @return J if rank value = 11, Q if rank value = 12, K if rank value = 13
+     * A if rank value = 14 of the value as String if none of the former
+     */
     public String rankAsString(int rank) {
         switch (rank) {
             case 11: 

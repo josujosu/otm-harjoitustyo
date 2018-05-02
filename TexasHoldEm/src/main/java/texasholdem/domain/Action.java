@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- *
+ *Class that encapsulates an action made by a player
  * @author josujosu
  */
 public class Action {
@@ -24,6 +24,25 @@ public class Action {
         this.type = type;
         this.call = call;
         this.raise = raise;
+    }
+    
+    
+    /**
+     * Used to keep track of actions in the Text UI
+     * 
+     * @return A string formatted in such a way that it works in the Text UI
+     */
+    public String toStringTextUIFormatted() {
+        switch (this.type) {
+            case CALL:
+                return "Called/Checked";
+            case RAISE:
+                return "Raised " + this.raise;
+            case FOLD:
+                return "Folded";
+            default:
+                return "Did something";
+        }
     }
     
     /**
