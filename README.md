@@ -6,7 +6,7 @@ Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. 
 
 [Viikko 5](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko5)
 
-[Viikko6](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko6)
+[Viikko 6](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko6)
 
 ## Dokumentaatio
 
