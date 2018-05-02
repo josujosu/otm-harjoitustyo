@@ -14,6 +14,8 @@ Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. 
 
 [Arkkitehtuuri](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman ajaminen
@@ -49,4 +51,12 @@ Tiedostoon checkstyle.xml määritetyt tarkistukset voi suorittaa komennolla
     mvn jxr:jxr checkstyle:checkstyle
     
 Virheilmoitukset voi tarkastaa avaamalla tiedoston *target/site/checkstyle.html* selaimella
+
+### JavaDoc
+
+JavaDoc:in voi generoida komennolla
+
+    mvn javadoc:javadoc
+    
+JavaDoc:ia voi tarkastella avaamalla tiedoston *target/site/apidocs/index.html* selimella
 
