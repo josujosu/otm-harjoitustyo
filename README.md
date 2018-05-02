@@ -6,6 +6,8 @@ Sovelluksen avulla voi pelata *Texas Hold 'Em*-korttipeliä tekoälyä vastaan. 
 
 [Viikko 5](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko5)
 
+[Viikko6](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko6)
+
 ## Dokumentaatio
 
 [Työaikakirjanpito](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
