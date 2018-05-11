@@ -14,6 +14,8 @@ Päivämäärä | Käytetty aika | Mitä tehty
 29.4. | 3 tuntia | Tilastotaulukot tehty loppuun
 1.5. | 4 tuntia | Testien tekemistä, debuggailua, javadocin tekemistä
 2.5. | 7 tuntia | Paljon debuggailua, testejä ja javadocia
-**yht.** | **33.5 tuntia** | 
+9.5. | 2.5 tuntia | Testejä ja javadocia
+11.5. | 10 tuntia | Testejä, käyttöliittymän viimeistejyä ja javadocin viimeistely
+**yht.** | **46 tuntia** | 
 
 
