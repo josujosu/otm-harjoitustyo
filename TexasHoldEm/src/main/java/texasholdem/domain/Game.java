@@ -511,7 +511,4 @@ public class Game {
     public void setPlayers(HashMap<String, Player> players) {
         this.players = players;
     }
-    
-    
-
 }

@@ -47,7 +47,7 @@ public class CreateUserTextScene implements TextScene{
                 case "x":
                     return new StartTextScene();
                 default:
-                    System.out.println("Invalid command");
+                    System.out.println("Not a command");
                     break;
             }
         

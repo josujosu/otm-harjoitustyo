@@ -261,7 +261,7 @@ public class PokerHand {
         for (int i = ranks.size() - 1; i >= 1; i--) {
             
             if ((ranks.get(i) != 0) && (!excludedRanks.contains(i + 1))) {
-                highRanks.add(i+1);
+                highRanks.add(i + 1);
             }
             
             if (highRanks.size() >= n) {
@@ -323,7 +323,7 @@ public class PokerHand {
             
             if (card.getSuit() == suit || suit == null) {
                 ranksWithSuit.add(card.getRank());                
-                if(card.getRank() == 14) {
+                if (card.getRank() == 14) {
                     ranksWithSuit.add(1);
                 }            
             }

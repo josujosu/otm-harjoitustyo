@@ -29,7 +29,7 @@ public class PlayingTextScene implements TextScene{
         
         while (true) {
             System.out.print("Choose user: \n"
-                    + "Give id: pick user\n"
+                    + "id: pick user\n"
                     + "x: return to main menu\n"
                     + "> ");
             String command = scan.next();
@@ -41,6 +41,7 @@ public class PlayingTextScene implements TextScene{
             User playerUser = this.op.getUser(command);
             if (playerUser == null) {
                 System.out.println("Could not pick requested user");
+                return new StartTextScene();
             }
             
             newGame = this.op.createGame(playerUser);

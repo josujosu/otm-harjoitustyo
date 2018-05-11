@@ -34,18 +34,18 @@ public class UIOperations {
      */
     public boolean printAllUsers() {
         List<User> users;
-        try{
+        try {
             users = uDao.findAll();
-            if(users.isEmpty()){
+            if (users.isEmpty()) {
                 System.out.println("No users found!");
                 return false;
             } else {
-                for(User user: users){
+                for (User user: users) {
                     System.out.println(user);
                 }
                 return true;
             }          
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }        
@@ -77,7 +77,7 @@ public class UIOperations {
      */
     public boolean createUser(String username) {
         
-        try{
+        try {
             List<User> users = this.uDao.findAll();
             
             for (User user : users) {
@@ -128,7 +128,7 @@ public class UIOperations {
         
         Game game = new Game(user, 8);
         
-        if(game.playerUserCanBeUsed(user)) {
+        if (game.playerUserCanBeUsed(user)) {
             return game;
         } else {
             return null;
@@ -158,7 +158,7 @@ public class UIOperations {
         
         try {
             
-            if(uDao.findAll().size() > 0) {
+            if (uDao.findAll().size() > 0) {
                 return true;
             } else {
                 return false;

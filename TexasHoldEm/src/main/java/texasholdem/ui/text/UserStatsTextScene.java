@@ -24,7 +24,29 @@ public class UserStatsTextScene implements TextScene {
             System.out.println("No users to check!");
             return new StartTextScene();
         }
-        this.selectUserToInspect();
+        
+        while (true) {
+            this.op.printAllUsers();
+            System.out.print("Choose user: \n"
+                    + "id: pick user\n"
+                    + "x: return to main menu\n"
+                    + "> ");
+            String command = scan.next();
+            switch (command) {
+                case "x":
+                    return new StartTextScene();
+                default:
+                    this.user = this.op.getUser(command);
+                    if (this.user != null) {
+                        break;
+                    } else {
+                        System.out.println("Could not pick user");
+                        return new StartTextScene();
+                    }
+            }
+            break;
+        }
+        
         this.selectWhatToInspect();
         
         return new StartTextScene();
@@ -34,10 +56,8 @@ public class UserStatsTextScene implements TextScene {
      * A method for defining the UI when the user is selecting the User to inspect
      */
     public void selectUserToInspect() {
-        System.out.println("Select user: ");
-        this.op.printAllUsers();
-        System.out.println("> ");
-        this.user = this.op.getUser(scan.next());
+        
+
     }
     
     /**
