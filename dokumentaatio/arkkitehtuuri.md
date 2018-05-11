@@ -8,6 +8,20 @@ Ohjelman rakenne noudattaa seuraavanlaista kerrosarkkitehtuuria:
 
 Pakkaus *texasholdem.ui* sisältää tekstikäyttöliittymän, *texasholdem.domain* sovelluslogiikan määrittävät luokat ja *tekasholdem.database* sekä *texasholdem.database.collector* tietokannan ylläpitämiseen tarvittavat luokat.
 
+## Käyttöiittymä
+
+Sovelluksen tekstikäyttöliittymä koostuu neljästä erillisestä näykmäoliosta:
+
+- StartTextScene, eli aloitus valikko
+
+- CreateUserTextScene, eli käyttäjien hallinnoimisen valikko
+
+- UserStatsTextScene, eli käyttäjien tilastojen tarkastelemisen valkko
+
+- PlayingTextScene, eli itse pelaamisen näkymä
+
+Jokainen näistä näkymäolioista toteuttaa *TextScene*-rajapinnan, joka mahdollistaa näkymien saumattoman vaihtamisen. Näkymien vaihtaminen perustuu *TextScene*:n määrittämään *run()*-metodiin, joka tekstikäyttöliittymän ulkoasun ja toiminnallisuuden määrittämisen lisäksi palauttaa *return*-arvonaan seuraavan näkymäolion. *TextUI*-luokka ajaa näiden näkymäolioiden *run()*-metodeja, ja saatuaan niiden palautusarvona seuraavan näkymäolion, aloittaa *TextUI* tämän olion *run()*-metodin ajamisen. Tämä jatkuu, kunnes *TextUI* saa palautusarvona null, jolloin ohjelma lopetetaan.
+
 ## Sovelluslogiikka
 
 Seuraava luokka/pakkauskaavio kuvaa jokaisen sovelluksessa esiintyvän, mukaanlukematta käyttöliittymän muodostamiseen tarkoiteetujen, luokan suhdetta:
