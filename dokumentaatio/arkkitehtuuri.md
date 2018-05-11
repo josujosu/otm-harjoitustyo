@@ -14,7 +14,7 @@ Sovelluksen tekstikäyttöliittymä koostuu neljästä erillisestä näykmäolio
 
 - StartTextScene, eli aloitus valikko
 
-- CreateUserTextScene, eli käyttäjien hallinnoimisen valikko
+- [CreateUserTextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/CreateUserTextScene.java), eli käyttäjien hallinnoimisen valikko
 
 - UserStatsTextScene, eli käyttäjien tilastojen tarkastelemisen valkko
 
