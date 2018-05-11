@@ -256,7 +256,7 @@ public class Game {
     public void setCurrentPlayerToFirstNotFolded() {
         for (int i = 0; i < this.getPlayerOrder().size(); i++) {
             if (!this.foldedPlayers.contains(this.playerOrder.get(i))) {
-                this.currentPlayer = i;
+                this.setCurrentPlayer(i);
             }
         }
     }
@@ -285,7 +285,7 @@ public class Game {
         Collections.rotate(getPlayerOrder(), -1);
         this.pot = 0;
         this.setLargestBet(0);
-        this.currentPlayer = 0;
+        this.setCurrentPlayer(0);
         this.deck = new Deck();
         this.resetPlayers();
         this.table = new Deck(new ArrayList<>());
@@ -503,6 +503,13 @@ public class Game {
      */
     public void setLargestBet(int largestBet) {
         this.largestBet = largestBet;
+    }
+
+    /**
+     * @param players the players to set
+     */
+    public void setPlayers(HashMap<String, Player> players) {
+        this.players = players;
     }
     
     

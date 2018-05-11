@@ -8,10 +8,7 @@ package texasholdem.database;
 import texasholdem.domain.User;
 import texasholdem.database.collector.UserCollector;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,6 +26,7 @@ public class UserDao implements Dao<User, Integer> {
      */
     public UserDao(Database db) {
         this.db = db;
+        this.init();
     }
 
     @Override
@@ -55,6 +53,15 @@ public class UserDao implements Dao<User, Integer> {
     @Override
     public void delete(Integer key) throws SQLException {
         this.db.update("DELETE FROM User WHERE id = ?", key);
+    }
+    
+    @Override
+    public void init() {
+        try {
+            this.db.update("CREATE TABLE IF NOT EXISTS User (id integer PRIMARY KEY, username varchar(60), balance integer)");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**

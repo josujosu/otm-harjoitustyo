@@ -100,7 +100,7 @@ public class User {
     public List<Result> getResultsOfUser() {
         List<Result> results = new ArrayList<>();
         try {
-            results = this.dao.findAllWithSameUserId(this.id);
+            results = this.getDao().findAllWithSameUserId(this.id);
         } catch (Exception e) {
             System.out.println(e);
         } 
@@ -152,6 +152,20 @@ public class User {
      */
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    /**
+     * @param dao the dao to set
+     */
+    public void setDao(ResultDao dao) {
+        this.dao = dao;
+    }
+
+    /**
+     * @return the dao
+     */
+    public ResultDao getDao() {
+        return dao;
     }
 
 }

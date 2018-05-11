@@ -7,18 +7,23 @@ package domain;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import texasholdem.domain.Card;
+import texasholdem.domain.Deck;
 
 /**
  *
  * @author josujosu
  */
 import texasholdem.domain.Game;
+import texasholdem.domain.Player;
 import texasholdem.domain.User;
 
 public class GameTest {
@@ -111,6 +116,86 @@ public class GameTest {
             this.game.nextPlayer();
         }
         assertEquals(0, this.game.getCurrentPlayer());
+    }
+    
+    @Test
+    public void getPlayersWithBestHandsReturnsBestPlayerWhenOnlyOneHasBestHand() {
+        HashMap<String, Player> players = new HashMap<>();
+        ArrayList<Card> c1 = new ArrayList<>();
+        c1.add(new Card(Card.Suit.HEARTS, 14));
+        c1.add(new Card(Card.Suit.HEARTS, 13));
+        c1.add(new Card(Card.Suit.HEARTS, 12));
+        c1.add(new Card(Card.Suit.HEARTS, 11));
+        c1.add(new Card(Card.Suit.HEARTS, 10));
+        ArrayList<Card> c2 = new ArrayList<>();
+        c2.add(new Card(Card.Suit.HEARTS, 13));
+        c2.add(new Card(Card.Suit.HEARTS, 12));
+        c2.add(new Card(Card.Suit.HEARTS, 11));
+        c2.add(new Card(Card.Suit.HEARTS, 10));
+        c2.add(new Card(Card.Suit.HEARTS, 9));
+        ArrayList<Card> c3 = new ArrayList<>();
+        c3.add(new Card(Card.Suit.HEARTS, 14));
+        c3.add(new Card(Card.Suit.HEARTS, 8));
+        c3.add(new Card(Card.Suit.HEARTS, 12));
+        c3.add(new Card(Card.Suit.HEARTS, 11));
+        c3.add(new Card(Card.Suit.HEARTS, 10));
+        players.put("1", new Player(new User(1, "1", 10), new Deck(c1)));
+        players.put("2", new Player(new User(1, "2", 10), new Deck(c2)));
+        players.put("3", new Player(new User(1, "3", 10), new Deck(c3)));
+        this.game.setPlayers(players);
+        assertEquals("1", this.game.getPlayersWithBestHand().get(0).getUser().getUsername());
+    }
+    
+    @Test
+    public void getPlayersWithBestHandsReturnsBestPlayerWhenMultipleHasBestHand() {
+        HashMap<String, Player> players = new HashMap<>();
+        ArrayList<Card> c1 = new ArrayList<>();
+        c1.add(new Card(Card.Suit.HEARTS, 14));
+        c1.add(new Card(Card.Suit.HEARTS, 13));
+        c1.add(new Card(Card.Suit.HEARTS, 12));
+        c1.add(new Card(Card.Suit.HEARTS, 11));
+        c1.add(new Card(Card.Suit.HEARTS, 10));
+        ArrayList<Card> c2 = new ArrayList<>();
+        c2.add(new Card(Card.Suit.HEARTS, 13));
+        c2.add(new Card(Card.Suit.HEARTS, 12));
+        c2.add(new Card(Card.Suit.HEARTS, 11));
+        c2.add(new Card(Card.Suit.HEARTS, 10));
+        c2.add(new Card(Card.Suit.HEARTS, 14));
+        ArrayList<Card> c3 = new ArrayList<>();
+        c3.add(new Card(Card.Suit.HEARTS, 14));
+        c3.add(new Card(Card.Suit.HEARTS, 8));
+        c3.add(new Card(Card.Suit.HEARTS, 12));
+        c3.add(new Card(Card.Suit.HEARTS, 11));
+        c3.add(new Card(Card.Suit.HEARTS, 10));
+        players.put("1", new Player(new User(1, "1", 10), new Deck(c1)));
+        players.put("2", new Player(new User(1, "2", 10), new Deck(c2)));
+        players.put("3", new Player(new User(1, "3", 10), new Deck(c3)));
+        this.game.setPlayers(players);
+        assertEquals("12", this.game.getPlayersWithBestHand().get(0).getUser().getUsername() + this.game.getPlayersWithBestHand().get(1).getUser().getUsername());
+    }
+    
+    @Test
+    public void playerInRelationToCurrentReturnsRightPlayerWhenRelationIsSamllerThanIndexAndNegative() {
+        this.game.setCurrentPlayer(5);
+        assertEquals(this.game.getPlayerOrder().get(2), this.game.playerInRelationToCurrent(-3));
+    }
+    
+    @Test
+    public void playerInRelationToCurrentReturnsRightPlayerWhenRelationIsLargerThanIndexAndNegative() {
+        this.game.setCurrentPlayer(5);
+        assertEquals(this.game.getPlayerOrder().get(6), this.game.playerInRelationToCurrent(-7));
+    }
+    
+    @Test
+    public void playerInRelationToCurrentReturnsRightPlayerWhenRelationIsSamllerThanIndexAndPositive() {
+        this.game.setCurrentPlayer(5);
+        assertEquals(this.game.getPlayerOrder().get(6), this.game.playerInRelationToCurrent(1));
+    }
+    
+    @Test
+    public void playerInRelationToCurrentReturnsRightPlayerWhenRelationIsLargerThanIndexAndPositive() {
+        this.game.setCurrentPlayer(5);
+        assertEquals(this.game.getPlayerOrder().get(2), this.game.playerInRelationToCurrent(5));
     }
     
     

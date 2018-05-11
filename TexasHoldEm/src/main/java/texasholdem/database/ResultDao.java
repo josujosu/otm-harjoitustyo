@@ -24,6 +24,7 @@ public class ResultDao implements Dao<Result, Integer> {
      */
     public ResultDao(Database db) {
         this.db = db;
+        this.init();
     }
 
     @Override
@@ -50,6 +51,15 @@ public class ResultDao implements Dao<Result, Integer> {
     @Override
     public void delete(Integer key) throws SQLException {
         this.db.update("DELETE FROM Result WHERE id = ?", key);
+    }
+    
+    @Override
+    public void init() {
+        try {
+            this.db.update("CREATE TABLE IF NOT EXISTS Result (id integer PRIMARY KEY, userId integer, oldBalance integer, balanceChange integer, FOREIGN KEY (userId) REFERENCES User(id))");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**

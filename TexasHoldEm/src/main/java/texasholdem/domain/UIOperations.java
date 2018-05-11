@@ -55,7 +55,7 @@ public class UIOperations {
      * A method for retrieving a User object from a database
      * @param command A command given in the UI. Should correspond to the id of the 
      * user to be retrieved
-     * @return If aquiring of the User was successful the User object, otherwise null
+     * @return If acquiring of the User was successful the User object, otherwise null
      */
     public User getUser(String command) {
         try {
@@ -170,6 +170,20 @@ public class UIOperations {
         
         }
       
+    }
+
+    /**
+     * @param uDao the uDao to set
+     */
+    public void setuDao(UserDao uDao) {
+        this.uDao = uDao;
+    }
+
+    /**
+     * @param rDao the rDao to set
+     */
+    public void setrDao(ResultDao rDao) {
+        this.rDao = rDao;
     }
     
 }

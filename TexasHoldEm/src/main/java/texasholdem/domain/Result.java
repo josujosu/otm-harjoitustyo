@@ -43,6 +43,11 @@ public class Result {
         this.oldBalance = oldBalance;
         this.balanceChange = balanceChange;
     }
+    
+    @Override
+    public String toString() {
+        return this.id + " " + this.userId + " " + this.oldBalance + " " + this.balanceChange;
+    }
 
     /**
      * @return the id

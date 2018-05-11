@@ -38,8 +38,13 @@ public interface Dao<T, K> {
 
     /**
      * A method for removing elements from a database
-     * @param key The parameter that defines the element to be remved
+     * @param key The parameter that defines the element to be removed
      * @throws SQLException 
      */
     void delete(K key) throws SQLException;
+    
+    /**
+     * A method for initialising the table corresponding to the Dao-type
+     */
+    void init();
 }
