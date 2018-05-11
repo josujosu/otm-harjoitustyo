@@ -28,8 +28,6 @@ Seuraava luokka/pakkauskaavio kuvaa jokaisen sovelluksessa esiintyvän, mukaanlu
 
 ![Kuva ohjelman arkkitehtuurista](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/kuvat/arkkitehtuuri_uusin.png)
 
-### Pelin kulku
-
 Pelin kulku perustuu [Game](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Game.java)-luokan ja käyttöliittymän väliseen yhteistyöhön. Käyttöliittymä ottaa vastaan käyttäjän komentoja, ja välittää niiden kautta tehtäviä [Game](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Game.java)-oliolle, joka ylläpitää ja on perillä pelin tapahtumista. Pelin ylläpitäminen tapahtuu pääosin [Player](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Player.java)-olioiden ja [Deck](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Deck.java)-olioiden välityksellä. [Player](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Player.java) pitää sisällään tiedot tietystä pelin pelaajasta ja [Deck](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Deck.java) sisältää listan tiettyyn pakkaan sidotuista korteista, tai [Card](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Card.java)-olioista.
 
 Riippuen kutsutusta metodista, [Player](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Player.java)-olio voi tehdä pokeriin liittyviä toimintoja (kuten *fold* ja *raise*) vastaamalla annettuun komentoon, tai valitsemalla sattumanvaraisesti [ComputerAI](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/ComputerAI.java)-luokan määrittelemien metodien avulla. Tehdyn toiminnon kapseloi [Action](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Action.java)-oliot.
@@ -40,9 +38,17 @@ Jokaiseen [Player](https://github.com/josujosu/otm-harjoitustyo/blob/master/Texa
 
 ## Tietojen tallennus tietokantaan
 
-Sovelluksen datamalli koostuu kahdesta luokasta: [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java) ja [Result](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Result.java). Nämä kuvaavat vastaavasti sovellukseen kirjattuja käyttäjiä ja niihin liitettyjä tuloksia. Käyttäjät ja tulokset tallennetaan ennaltamäärättyyn tietokantaan: *THE.db*. Tietokantaan tallentaminen ja sen tietojen tarkastelu käyttävät hyväkseen rajapinnan *Dao*, sekä *UserDao*- ja *ResultDao*-luokkien määrittelemiä toiminnallisuuksia, jotka taas toimivat *Collector*-rajapinnan, *User-* ja *ResultCollector*-luokkien, sekä *Database*-luokan määrittelemien toimintojen avulla.
+Sovelluksen looginen datamalli koostuu kahdesta luokasta: [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java) ja [Result](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Result.java). Nämä kuvaavat vastaavasti sovellukseen kirjattuja käyttäjiä ja niihin liitettyjä tuloksia. Käyttäjät ja tulokset tallennetaan ennaltamäärättyyn tietokantaan: *THE.db*. Tietokantaan tallentaminen ja sen tietojen tarkastelu käyttävät hyväkseen rajapinnan *Dao*, sekä *UserDao*- ja *ResultDao*-luokkien määrittelemiä toiminnallisuuksia, jotka taas toimivat *Collector*-rajapinnan, *UserCollector*- ja *ResultCollector*-luokkien, sekä *Database*-luokan määrittelemien toimintojen avulla.
 
+### Tietokanta
 
+Tietokanta on SQLite-tietokanta, joka koostuu seuraavan tyyppisistä taulukoista:
+
+#### User
+
+id|username|balance 
+--|--------|-------
+1|kalle|2000
 
 ## Päätoiminnallisuudet
 
