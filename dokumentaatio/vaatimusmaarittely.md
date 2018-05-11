@@ -15,7 +15,7 @@ Sovelluksessa on vain yhdenlaisia käyttäjiä, eli käyttäjiä ovat vain pelin
 - Käyttäjä voi luoda sovellukseen oman tunnuksen
   - Tunnuksen on oltava uniikki
   - Tunnuksia voi luoda useita
-- Jokaiseen tunnukseen liitetään aloitusrahamäärä, jota voi kasvattaa tai vähentää pelaamalla tekoälyä vastaan
+- Jokaiseen tunnukseen liitetään aloitusrahamäärä (4000), jota voi kasvattaa tai vähentää pelaamalla tekoälyä vastaan
 - Halutessaan pelata tietyllä tunnuksella, käyttäjä voi valita sen sovelluksessa esiintyvästä listasta
 
 ### Pelaaminen
@@ -34,7 +34,7 @@ Sovelluksessa on vain yhdenlaisia käyttäjiä, eli käyttäjiä ovat vain pelin
 ### Tilastot
 
 - Käyttäjä voi tarkastella tietyn tunnuksen tilastoja
-  - Kuinka usein on voittanut
+  - Voittojen ja häviöoiden suhteen
   - Kuinka tunnukseen liitetty rahamäärä on muuttunut
   - Kuinka suuria häviöitä ja voittoja on tullut
 
