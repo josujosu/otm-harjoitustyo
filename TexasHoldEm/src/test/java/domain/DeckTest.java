@@ -89,6 +89,19 @@ public class DeckTest {
         assertEquals(49, this.d52.getCards().size());
     }
     
+    @Test
+    public void takeCardsDoesntRemoveCardsIfTryingToTakeMoreCardsThanTheDeckHas() {
+        this.d52.takeCards(53);
+        assertEquals(52, this.d52.getCards().size());
+    }
     
+    @Test
+    public void setCardsWorksAsIntended() {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card(Card.Suit.CLUBS, 7));
+        cards.add(new Card(Card.Suit.CLUBS, 9));
+        this.d52.setCards(cards);
+        assertEquals(cards, this.d52.getCards());
+    }
     
 }

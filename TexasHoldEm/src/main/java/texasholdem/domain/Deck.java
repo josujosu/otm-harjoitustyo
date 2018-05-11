@@ -17,6 +17,10 @@ public class Deck {
     
     private ArrayList<Card> cards;
     
+    /**
+     * Constructor
+     * @param params Lists of cards that make up the deck
+     */
     public Deck(List<Card>...params) {
         this.cards = new ArrayList<>();
         for (List<Card> newCards : params) {
@@ -24,6 +28,9 @@ public class Deck {
         }
     }
     
+    /**
+     * Constructor that makes the deck a basic 52 card deck
+     */
     public Deck() {
         this.cards = this.create52CardDeck();
     }

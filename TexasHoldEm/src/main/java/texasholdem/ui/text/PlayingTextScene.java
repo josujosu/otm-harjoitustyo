@@ -6,7 +6,7 @@
 package texasholdem.ui.text;
 
 /**
- *
+ * A Class that defines the UI for when the user is playing the game
  * @author josujosu
  */
 import java.util.List;
@@ -23,19 +23,39 @@ public class PlayingTextScene implements TextScene{
     
     @Override
     public TextScene run() {
-        this.listAllUsers();
+        this.op.printAllUsers();
         Game newGame;
         String status = "";
         
-        System.out.print("Choose user: ");
-        Integer userId = Integer.parseInt(scan.next());            
-        User playerUser = this.getUserFromDb(userId);
-        newGame = new Game(playerUser, 8);           
-        if(!newGame.playerUserCanBeUsed(playerUser)) {
-            System.out.println("User doesn't have enough money to be used");
-            return new StartTextScene();
-        }      
         while (true) {
+            System.out.print("Choose user: \n"
+                    + "Give id: pick user\n"
+                    + "x: return to main menu\n"
+                    + "> ");
+            String command = scan.next();
+            
+            if (command.equals("x")) {
+                return new StartTextScene();
+            }
+            
+            User playerUser = this.op.getUser(command);
+            if (playerUser == null) {
+                System.out.println("Could not pick requested user");
+            }
+            
+            newGame = this.op.createGame(playerUser);
+            
+            if (newGame != null) {
+                break;
+            } else {
+                System.out.println("User doesn't have enough money to be ued");
+            }
+        }
+        
+        
+        
+        while (true) {
+            System.out.println("---START GAME---");
             status = this.playPreFlop(newGame, status);
             status = this.play(newGame, status);
             newGame.putCardsOnTable(3);
@@ -47,6 +67,7 @@ public class PlayingTextScene implements TextScene{
             newGame.playShowdown();
             
             System.out.println("WINNER:");
+            
             for (Player p : newGame.getPlayersWithBestHand()) {
                 System.out.println(p);
             }
@@ -68,82 +89,78 @@ public class PlayingTextScene implements TextScene{
 
             System.out.print("New deal? 'y/n'");
             String command = scan.next();
+            
             if (command.equals("n")) {
                 break;
             }
-        }
         
-        
+        }     
         return new StartTextScene();
     }
     
+    /**
+     * A method that defines the UI when the game is going through it's logic
+     * @param game The Game that is being played
+     * @param status The status of the game before running this method
+     * @return The status of the game after running this method
+     */
     public String play(Game game, String status) {
         while(!(status.equals("NextRound") || status.equals("EndGame"))) {
             if(status.equals("Player") && !game.hasFolded("Player")) {
+                System.out.println("---PLAYER TURN---");
                 System.out.println(game.getPotAndTableString());
                 System.out.println(game.getHumanPlayer());
-                System.out.print("Actions: \n "
-                        + "Call, Raise, Fold\n"
-                        + "What will you do? ");
-                String command = scan.next();
-                switch(command) {
-                    case "Call":
-                        status = game.playHuman(command, 0);
-                        break;
-                    case "Raise":
-                        System.out.print("How much?: ");
-                        int raiseAmount = Integer.parseInt(scan.next());
-                        status = game.playHuman(command, raiseAmount);
-                        break;
-                    case "Fold":
-                        status = game.playHuman(command, 0);
-                        break;
-                    default:
-                        status = game.playHuman("Call", 0);
-                        break;
+                while (true) {
+                    System.out.print("What will you do?\n"
+                            + "Actions: \n"
+                            + "1: Call/Check \n"
+                            + "2: Raise \n"
+                            + "3: Fold\n"
+                        + "> ");
+                    String command = scan.next();
+                    switch(command) {
+                        case "1":
+                            status = game.playHuman("Call", 0);
+                            break;
+                        case "2":
+                            System.out.print("How much?: ");
+                            try {
+                                int raiseAmount = Integer.parseInt(scan.next());
+                                status = game.playHuman("Raise", raiseAmount);
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Invalid amount!");
+                                continue;
+                            }                            
+                        case "3":
+                            status = game.playHuman("Fold", 0);
+                            break;
+                        default:
+                            System.out.println("Invalid command!");
+                            continue;
+                    }
+                    break;
                 }
+                System.out.println("------------");
             } else {
                 status = game.playNext();
-                if (game.playerInRelationToCurrent(-1).equals(game.getLastActor())) {
-                    System.out.println(game.getLastActor() + ": " + game.getLatest().toStringTextUIFormatted());                    
-                }
+                this.op.printLatestAIPLayer(game);
             }
         }
+        
         status = game.initializeForNextRound();
         return status;
     }
     
+    /**
+     * A method for playing the "pre flop" part of the game.
+     * @param game The Game that is being played
+     * @param status The status of the game before running this method
+     * @return The status of the game after running this method
+     */
     public String playPreFlop(Game game, String status) {
         status = game.playBlinds();
         return status;
-    }
-    
-    public void listAllUsers(){
-        UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
-        List<User> users;
-        try{
-            users = dao.findAll();
-            if(users.isEmpty()){
-                System.out.println("No users found!");
-            } else {
-                for(User user: users){
-                    System.out.println(user);
-                }    
-            }            
-        } catch (Exception e){
-            System.out.println(e);
-        }        
-    }
-    
-    public User getUserFromDb(Integer key) {
-        UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
-        try {
-            return dao.findOne(key);        
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
-
     }
     
 }

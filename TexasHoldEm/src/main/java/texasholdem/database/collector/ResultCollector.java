@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import texasholdem.domain.Result;
 
 /**
- *
+ * A class for interpreting query results as Result objects
  * @author josujosu
  */
 public class ResultCollector implements Collector<Result> {

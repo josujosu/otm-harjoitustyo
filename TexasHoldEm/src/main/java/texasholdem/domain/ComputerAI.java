@@ -21,6 +21,9 @@ public class ComputerAI {
     private int maxNormalBet;
     private Random ran;
     
+    /**
+     * Constructor. Initialises the different probabilities used by the class
+     */
     public ComputerAI() {
         this.handCallProbability = 1.0;
         this.handRaiseProbability = 0.15;
@@ -32,16 +35,16 @@ public class ComputerAI {
     }
     
     /**
-     * Method for obtaining an Action, the nature of which is affected by the
+     * A Method for obtaining an Action, the nature of which is affected by the
      * deck parameter. It first decreases the probabilities for actions by checking
      * the number of the round played, then checks if the given deck contains a
      * hand better than a high, and depending on that decides which probability values to
      * use for deciding the action type.
-     * @param hand a Deck containing the cards which will affect the 
+     * @param hand A Deck containing the cards which will affect the 
      * nature of the return value
-     * @param call an integer depicting the amount of money the player making the
+     * @param call The amount of money the player making the
      * action has to use for a call
-     * @return the decided action that the player will make
+     * @return The decided action that the player will make
      */
     public Action makeAction(Deck hand, int call) {
         this.decreaseProbabilitiesAccordingToRoundNumber(hand);
@@ -59,8 +62,7 @@ public class ComputerAI {
      * @param rProb The probability for the action being a raise
      * @param call The amount of money the player making the action would need
      * for a call
-     * @return An Action with a randomly selected type and raise amount if the
-     * action is a raise type
+     * @return The selected Action
      */
     public Action selectRandomAction(double cProb, double rProb, int call) {
         if (this.ran.nextDouble() < rProb) {
@@ -86,7 +88,7 @@ public class ComputerAI {
     }
     
     /**
-     * Decreases the probability values for calling by 1/10th of the value of the
+     * A method for decreasing the probability values for calling by 1/10th of the value of the
      * current round number
      * @param deck The current deck from which the number of the round is inferred
      */

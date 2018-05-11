@@ -5,13 +5,8 @@
  */
 package texasholdem.ui.text;
 
-import texasholdem.database.*;
-import texasholdem.domain.User;
-import java.sql.SQLException;
-import java.util.List;
-
 /**
- *
+ * A Class that acts as the UI for when the user wants to manage Users in a database
  * @author josujosu
  */
 public class CreateUserTextScene implements TextScene{
@@ -26,61 +21,36 @@ public class CreateUserTextScene implements TextScene{
         while(true){            
             System.out.print("> ");
             String command = scan.next();
-        
-            if(command.equals("1")){
-                this.createUser();
-            } else if (command.equals("2")){
-                this.listAllUsers();
-            } else if (command.equals("3")){
-                this.removeUser();
-            } else if(command.equals("x")){
-                return new StartTextScene();
-            } else {
-                System.out.println("Invalid command!");
+            
+            switch (command) {
+                case "1":
+                    this.op.printAllUsers();
+                    System.out.print("Give username (has to be unique): ");
+                    String username = scan.next();
+                    if(!this.op.createUser(username)) {
+                        System.out.println("Could not create user");
+                    }
+                    break;
+                case "2":
+                    this.op.printAllUsers();
+                    break;
+                case "3":
+                    this.op.printAllUsers();
+                    System.out.print("Give id of the user you want to remove: ");
+                    String id = scan.next();
+                    if(!this.op.removeUser(id)) {
+                        System.out.println("Could not remove user.");
+                    } else {
+                        System.out.println("Successfully removed user " + id);
+                    }
+                    break;
+                case "x":
+                    return new StartTextScene();
+                default:
+                    System.out.println("Invalid command");
+                    break;
             }
-        }
-    }
-    
-    public void createUser(){
-        UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
-        System.out.print("Give username: ");
-        String username = scan.next();
-        User newUser = new User(1, username, 4000);
-        try{
-            dao.save(newUser);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-    
-    public void listAllUsers(){
-        UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
-        List<User> users;
-        try{
-            users = dao.findAll();
-            if(users.isEmpty()){
-                System.out.println("No users found!");
-            } else {
-                for(User user: users){
-                    System.out.println(user);
-                }    
-            }            
-        } catch (Exception e){
-            System.out.println(e);
-        }        
-    }
-    
-    public void removeUser(){
-        UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
-        ResultDao rDao = new ResultDao(new Database("jdbc:sqlite:THE.db"));
-        System.out.print("Give the id of the user you want to remove: ");
-        String command = scan.next();
-        Integer id = Integer.parseInt(command);
-        try{
-            dao.delete(id);
-            rDao.deleteAllWithSameUserId(id);
-        } catch (Exception e){
-            System.out.println(e);
+        
         }
     }
     

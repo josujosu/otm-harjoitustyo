@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- *
+ * A class that depicts a player playing Texas Hold'Em
  * @author josujosu
  */
 public class Player {
@@ -15,13 +15,22 @@ public class Player {
     private Deck hand;
     private int bet; // The amount of money the player has bet in the game
     
+    /**
+     * Constructor
+     * @param user The user that the Player will use
+     * @param hand The cards that the has in their hands as a Deck object
+     */
     public Player(User user, Deck hand) {
         this.user = user;
         this.hand = hand;
         this.bet = 0;
     }
     
-    // Returns the amount of money that will be added to the pot
+    /**
+     * A method that makes the Player make a call action
+     * @param largestBet The largest bet that has been made
+     * @return The amount of money the player has to use for calling
+     */
     public int call(int largestBet) {
         int calledMoney;
         int call = largestBet - this.bet;
@@ -36,7 +45,12 @@ public class Player {
         return calledMoney;
     }
     
-    // Returns the amount of money needed for a call + the bet
+    /**
+     * A method that makes the Player make a raise action
+     * @param raise The amount of money that the player raises
+     * @param largestBet The largest bet that has been made
+     * @return The raise amount + the amount of money needed for a call
+     */
     public int raise(int raise, int largestBet) {
         int betMoney = this.call(largestBet);
         // If the player doesn't have money for the raise, they go all in
@@ -48,6 +62,12 @@ public class Player {
         return betMoney + raise;
     }
     
+    /**
+     * A method used by AI players to make actions
+     * @param largestBet The largest bet that has been made
+     * @param table The cards that are currently on the table
+     * @return The action made by the AI player as an Action object
+     */
     public Action play(int largestBet, Deck table) {
         Deck currentCards = new Deck(this.hand.getCards());
         currentCards.addCards(table.getCards());
@@ -56,6 +76,10 @@ public class Player {
         return action;
     }
     
+    /**
+     * A method that makes the Player make an Action
+     * @param a The Action that will be made
+     */
     public void act(Action a) {
         switch (a.getType()) {
             case CALL:

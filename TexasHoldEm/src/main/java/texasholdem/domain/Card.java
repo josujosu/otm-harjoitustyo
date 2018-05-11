@@ -6,11 +6,14 @@
 package texasholdem.domain;
 
 /**
- * Class used for representing a card in Texas Hold'Em
+ * A Class representing a card in Texas Hold'Em
  * @author josujosu
  */
 public class Card {
     
+    /**
+     * Enumerator that represents the different suits found in Texas Hold'Em
+     */
     public enum Suit {
         DIAMONDS, HEARTS, CLUBS, SPADES
     }    
@@ -18,15 +21,20 @@ public class Card {
     private Suit suit;
     private int rank; // 2 is smallest, 14 is ace
     
+    /**
+     * Constructor
+     * @param suit Suit of the card
+     * @param rank Value of the rank of the card as an integer
+     */
     public Card(Suit suit, int rank) {
         this.suit = suit;
         this.rank = rank;
     }
     
     /**
-     * Converts Card.Suit to string
-     * @param suit the suit that is to be converted
-     * @return the unicode for a symbol of the corresponding suit
+     * A method for converting a Card.Suit into a String
+     * @param suit The suit
+     * @return The unicode for a symbol of the corresponding suit as a String
      */
     public String suitAsString(Card.Suit suit) {
         switch (suit) {
@@ -44,10 +52,10 @@ public class Card {
     }
     
     /**
-     * Converts a card rank from an integer to String
-     * @param rank a rank as integer
+     * A method for converting a card rank from an integer to String
+     * @param rank The value of the rank as integer
      * @return J if rank value = 11, Q if rank value = 12, K if rank value = 13
-     * A if rank value = 14 of the value as String if none of the former
+     * A if rank value = 14 or the value as String if none of the former
      */
     public String rankAsString(int rank) {
         switch (rank) {

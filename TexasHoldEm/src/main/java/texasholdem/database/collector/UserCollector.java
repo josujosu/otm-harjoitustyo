@@ -6,7 +6,7 @@
 package texasholdem.database.collector;
 
 /**
- *
+ * A class for interpreting query results as User objects
  * @author josujosu
  */
 import texasholdem.domain.User;

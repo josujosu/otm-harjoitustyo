@@ -16,13 +16,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- *
+ * A class for managing objects of the type "User" in a database
  * @author josujosu
  */
 public class UserDao implements Dao<User, Integer> {
 
     private Database db;
 
+    /**
+     * Constructor
+     * @param db  The database which will be managed
+     */
     public UserDao(Database db) {
         this.db = db;
     }
@@ -53,6 +57,12 @@ public class UserDao implements Dao<User, Integer> {
         this.db.update("DELETE FROM User WHERE id = ?", key);
     }
 
+    /**
+     * A method for adding to the balance parameter of a User in the database
+     * @param key The id of the user
+     * @param amount The amount that will be added
+     * @throws SQLException 
+     */
     public void addToBalance(Integer key, Integer amount) throws SQLException {
         this.db.update("UPDATE User SET balance = balance + ? WHERE id =  ?", amount, key);
     }

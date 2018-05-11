@@ -23,6 +23,12 @@ public class User {
     private int balance;
     private ResultDao dao;
 
+    /**
+     * Constructor
+     * @param id id of the user
+     * @param username username of the user
+     * @param balance balance associated with the user
+     */
     public User(int id, String username, int balance) {
         this.id = id;
         this.username = username;

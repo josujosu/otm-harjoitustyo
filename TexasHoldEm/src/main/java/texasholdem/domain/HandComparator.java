@@ -6,10 +6,11 @@
 package texasholdem.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Class used for comparing poker hands as PokerHand objects
+ * A class used for comparing poker hands as PokerHand objects
  * @author josujosu
  */
 public class HandComparator {
@@ -17,6 +18,9 @@ public class HandComparator {
     final HashMap<PokerHand.HandType, Integer> handTypes;
     private ArrayList<Integer> excluded;
 
+    /**
+     * Constructor
+     */
     public HandComparator() {
         this.handTypes = this.createHandTypesArrayInOrder();
         this.excluded = new ArrayList<>();
@@ -48,7 +52,7 @@ public class HandComparator {
     }
 
     /**
-     * Compares two PokerHand variables and figures out the better of the two. It
+     * A method that compares two PokerHand variables and figures out the better of the two. It
      * first checks if one of the hands has a better type. If not, the method 
      * "compareSameHands" is called.
      * @param hand1 The first hand to be compared
@@ -82,80 +86,33 @@ public class HandComparator {
             case STRAIGHTFLUSH:
                 return this.compareHighest(hand1, hand2);
             case FOUR:
-                return this.compareOnceFromNumberOfCardsThenHigh(hand1, hand2, 4);
+                return this.compareFromNumberOfCardsThenHigh(hand1, hand2, 4);
             case FULLHOUSE:
-                return this.compareTwiceFromNumberOfCardsThenHigh(hand1, hand2, 3, 2);
+                return this.compareFromNumberOfCardsThenHigh(hand1, hand2, 3, 2);
             case FLUSH:
                 return this.compareHigh(hand1, hand2, 5);
             case STRAIGHT:
                 return this.compareHighest(hand1, hand2);
             case THREE:
-                return this.compareOnceFromNumberOfCardsThenHigh(hand1, hand2, 3);
+                return this.compareFromNumberOfCardsThenHigh(hand1, hand2, 3);
             case TWOPAIRS:
-                return this.compareTwiceFromNumberOfCardsThenHigh(hand1, hand2, 2, 2);
+                return this.compareFromNumberOfCardsThenHigh(hand1, hand2, 2, 2);
             case PAIR:
-                return this.compareOnceFromNumberOfCardsThenHigh(hand1, hand2, 2);
+                return this.compareFromNumberOfCardsThenHigh(hand1, hand2, 2);
             default:
                 return this.compareHigh(hand1, hand2, 5);
         }
     }
 
-/*
-    public int compareFourOfAKind(PokerHand hand1, PokerHand hand2) {
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 4, new ArrayList<>());
-        if (comparison == 0) {
-            return this.compareHigh(hand1, hand2, 1);
-        } else {
-            return comparison;
-        }
-    }
-
-    
-    public int compareFullHouse(PokerHand hand1, PokerHand hand2) {
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 3, new ArrayList<>());
-        if (comparison != 0) {
-            return comparison;
-        }
-        comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 2, new ArrayList<>());
-        if (comparison != 0) {
-            return comparison;
-        }
-        return 0;
-    }
-
-    public int compareThreeOfAKind(PokerHand hand1, PokerHand hand2) {
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 3, new ArrayList<>());
-        if (comparison != 0) {
-            return comparison;
-        } else {
-            return this.compareHigh(hand1, hand2, 2);
-        }
-    }
-
-    public int compareTwoPairs(PokerHand hand1, PokerHand hand2) {
-        ArrayList<Integer> excluded = new ArrayList<>();
-        int ownTwo = this.getHighestRankFromNumberOfCards(hand1.getRanksInHand(), 2, excluded);
-        int otherTwo = this.getHighestRankFromNumberOfCards(hand2.getRanksInHand(), 2, excluded);
-        if (ownTwo - otherTwo != 0) {
-            return ownTwo - otherTwo;
-        }
-        excluded.add(ownTwo);
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 2, excluded);
-        if (comparison != 0) {
-            return comparison;
-        }
-        return this.compareHigh(hand1, hand2, 1);
-    }
-
-    public int comparePair(PokerHand hand1, PokerHand hand2) {
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 2, new ArrayList<>());
-        if (comparison != 0) {
-            return comparison;
-        }
-        return this.compareHigh(hand1, hand2, 3);
-    }
-    */
-
+    /**
+     * A method for comparing the high cards of two poker hands
+     * @param hand1 First hand to be compared
+     * @param hand2 Second hand to be compared
+     * @param n Number of possible high cards (ex. 5 card hand has a pair, so number
+     * of possible high cards is 3)
+     * @return A positive value if hand1 is better, negative if hand2 and 0 if they
+     * are equally good
+     */
     public int compareHigh(PokerHand hand1, PokerHand hand2, int n) {
         for (int i = 0; i < n; i++) {
             int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, 1);
@@ -166,66 +123,96 @@ public class HandComparator {
         return 0;
     }
 
+    /**
+     * A method for comparing the highest rank found in the given hands
+     * @param hand1 First hand to be compared
+     * @param hand2 Second hand to be compared
+     * @return 1 if hand1 has higher card, 2 if hand 2 has higher card and 0 if
+     * the highest card in both hands has the same rank
+     */
     public int compareHighest(PokerHand hand1, PokerHand hand2) {
         for (int i = hand1.getRanksInHand().size() - 1; i >= 0; i--) {
             if (hand1.getRanksInHand().get(i) > hand2.getRanksInHand().get(i)) {
                 return 1;
-            } else if (hand1.getRanksInHand().get(i) > hand2.getRanksInHand().get(i)) {
+            } else if (hand1.getRanksInHand().get(i) < hand2.getRanksInHand().get(i)) {
                 return -1;
             }
         }
         return 0;
     }
 
+    /**
+     * A method that compares two PokerHands by comparing the value of ranks that 
+     * appear n times in the given hands.
+     * @param hand1 First hand in the comparison
+     * @param hand2 Second hand in the comparison
+     * @param n Number of times the same rank has to appear in a hand in order 
+     * to be compared
+     * @return A positive integer if hand1 is better, negative if hand2 and 0 if they
+     * are equally good
+     */
     public int compareHighestRankFromNuberOfCards(PokerHand hand1, PokerHand hand2, int n) {
         int own = this.getHighestRankFromNumberOfCards(hand1.getRanksInHand(), n);
         int other = this.getHighestRankFromNumberOfCards(hand2.getRanksInHand(), n);
         if (own - other == 0) {
             this.excluded.add(own);
-            this.excluded.add(other);
-            System.out.println(this.excluded);
         }
         return own - other;
     }
     
-    public int compareOnceFromNumberOfCardsThenHigh(PokerHand hand1, PokerHand hand2, int n) {
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, n);
-        if (comparison != 0) {
-            return comparison;
-        } else {
-            return this.compareHigh(hand1, hand2, 5 - n);
-        }
-    }
-    
-    public int compareTwiceFromNumberOfCardsThenHigh(PokerHand hand1, PokerHand hand2, int n1, int n2) {
-        int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, n1);
-        if (comparison != 0) {
-            return comparison;
-        }
-        comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, n2);
-        if (comparison != 0) {
-            return comparison;
-        }
-        return this.compareHigh(hand1, hand2, 5 - n1 - n2);
+    /**
+     * A method that first compares two PokerHands by the value of ranks that appear n
+     * times in the given hand and then by the rank of the highest of the 
+     * remaining cards.
+     * @param hand1 First hand to be compared
+     * @param hand2 Second hand to be compared
+     * @param n Number of times a rank has to appear for it to be compared in the 
+     * first type of comparisons. Giving multiple values makes the type of comparison
+     * with all of them.
+     * @return A positive value if hand1 is better, negative if hand2 and 0 if they
+     * are equally good
+     */
+    public int compareFromNumberOfCardsThenHigh(PokerHand hand1, PokerHand hand2,  int...n) {        
+        int cardsLeft = 5;        
+        for (int i = 0; i < n.length; i++) {
+            int comparison = this.compareHighestRankFromNuberOfCards(hand1, hand2, n[i]);            
+            if (comparison != 0) {                
+                return comparison;            
+            }            
+            cardsLeft -= n[i];        
+        }        
+        return this.compareHigh(hand1, hand2, cardsLeft);
     }
 
-    // Allows you to get eg. rank of pair in a hand from rank array, with exclusion
-    // of a certain rank
+    /**
+     * A method for retrieving the highest rank that appears n times in a specially
+     * formatted integer ArrayList containing the ranks of a hand.
+     * @param ranks ArrayList containing the number of times a certain rank appears
+     * in a hand. The index of the value corresponds to the rank (0 and 13 = ace, 1...12
+     * = 2...king).
+     * @param n The number of times a rank has to appear.
+     * @return The highest rank with n appearences as an integer.
+     */
     public int getHighestRankFromNumberOfCards(ArrayList<Integer> ranks, int n) {
         int rank = 0;
         for (int i = ranks.size() - 1; i >= 0; i--) {
-            if ((ranks.get(i) == n) && !(this.excluded.contains(i))) {
-                rank = i;
+            if ((ranks.get(i) == n) && !(this.excluded.contains(i + 1))) {
+                rank = i + 1;
                 break;
             }
         }
         return rank;
     }
 
+    /**
+     * A method that creates a HashMap that contains all of the hand types as keys
+     * and the value of the type as values 
+     * @return The HashMap
+     */
     final public HashMap<PokerHand.HandType, Integer> createHandTypesArrayInOrder() {
         HashMap<PokerHand.HandType, Integer> newHandTypes = new HashMap<>();
-        newHandTypes.put(PokerHand.HandType.ROYALFLUSH, 11);
-        newHandTypes.put(PokerHand.HandType.STRAIGHTFLUSH, 10);
+        newHandTypes.put(PokerHand.HandType.ROYALFLUSH, 10);
+        newHandTypes.put(PokerHand.HandType.STRAIGHTFLUSH, 9);
         newHandTypes.put(PokerHand.HandType.FOUR, 8);
         newHandTypes.put(PokerHand.HandType.FULLHOUSE, 7);
         newHandTypes.put(PokerHand.HandType.FLUSH, 6);

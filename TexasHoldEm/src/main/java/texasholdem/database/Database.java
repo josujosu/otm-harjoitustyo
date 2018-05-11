@@ -15,13 +15,17 @@ import java.util.ArrayList;
 import texasholdem.database.collector.Collector;
 
 /**
-*
+* A class for directly interacting with a database
 * @author josujosu
 */
 public class Database {
 
     private Connection connection;
 
+    /**
+     * Constructor
+     * @param databaseAddress Address of the database
+     */
     public Database(String databaseAddress) {
         try {
             this.connection = DriverManager.getConnection(databaseAddress);
@@ -30,6 +34,15 @@ public class Database {
         }
     }
 
+    /**
+     * A method for retrieving elements from a database using a SQLite query
+     * @param <T> The type of the elements
+     * @param query SQLite query for acquiring elements from a database
+     * @param col A Collector for extracting a type of Object from the query results
+     * @param params Additional parameters that might be needed in a query
+     * @return A list of elements
+     * @throws SQLException 
+     */
     public <T> List<T> queryAndCollect(final String query, final Collector<T>
             col, final Object...params) throws SQLException {
         List<T> lines = new ArrayList<>();
@@ -49,6 +62,13 @@ public class Database {
         return lines;
     }
     
+    /**
+     * A method for updating a database using a SQLite query
+     * @param updateQuery The query for the update
+     * @param params Additional parameters that might be needed for the query
+     * @return The number of changes made into the database as an integer
+     * @throws SQLException 
+     */
     public int update(String updateQuery, Object... params) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(updateQuery);
 

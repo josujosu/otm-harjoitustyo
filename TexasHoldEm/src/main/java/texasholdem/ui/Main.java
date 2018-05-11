@@ -7,21 +7,16 @@ package texasholdem.ui;
  */
 
 /**
- *
+ * The Main class of the program. Launches the game
  * @author josujosu
  */
-import javafx.application.Application;
 import texasholdem.ui.text.TextUi;
-import texasholdem.ui.graphical.TexasHoldEmUI;
-import texasholdem.domain.*;
-import java.util.ArrayList;
+
 
 public class Main {
     
     public static void main(String[] args) {
-        
-        //TexasHoldEmUI.launch(TexasHoldEmUI.class);
-        
+
         System.out.println("!!!WELCOME TO TEXAS HOLD 'EM!!!\n"
                 + "###############################");
         TextUi tui = new TextUi();

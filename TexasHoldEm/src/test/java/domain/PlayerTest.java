@@ -120,4 +120,29 @@ public class PlayerTest {
         assertEquals(110, this.player.getBet());
     }
     
+    @Test
+    public void actDoesNothingWhenTheActionIsFold() {
+        this.player.act(new Action(Action.ActionType.FOLD, 0, 0));
+        assertEquals(0, this.player.getBet());
+    }
+    
+    @Test
+    public void getHandReturnsTheRightValue() {
+        ArrayList<Card> ownCards = new ArrayList<>();
+        ownCards.add(new Card(Card.Suit.CLUBS, 14));
+        ownCards.add(new Card(Card.Suit.CLUBS, 2));
+        Deck d = new Deck(ownCards);
+        assertEquals(d.toString(), this.player.getHand().toString());
+    }
+    
+    @Test
+    public void setHandWorksAsIntended() {
+        ArrayList<Card> ownCards = new ArrayList<>();
+        ownCards.add(new Card(Card.Suit.CLUBS, 3));
+        ownCards.add(new Card(Card.Suit.HEARTS, 2));
+        Deck d = new Deck(ownCards);
+        this.player.setHand(d);
+        assertEquals(d.toString(), this.player.getHand().toString());
+    }
+    
 }

@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- * A class depicting the result of a deal
+ * A class depicting the result of a Texas Hold'Em deal
  * @author josujosu
  */
 public class Result {
@@ -16,6 +16,12 @@ public class Result {
     private int oldBalance;
     private int balanceChange;
     
+    /**
+     * Constructor
+     * @param id The id of the result
+     * @param user The user whose result the Result in question is
+     * @param balanceChange The amount the balance of the user has changed
+     */
     public Result(int id, User user, int balanceChange) {
         this.id = id;
         this.userId = user.getId();
@@ -23,6 +29,14 @@ public class Result {
         this.balanceChange = balanceChange;
     }
     
+    /**
+     * Constructor
+     * @param id The id of the result
+     * @param userId The id of the user whose result the Result in question is
+     * @param oldBalance The balance of the user whose result the Result in question is
+     * before the change depicted in the result
+     * @param balanceChange The amount the balance of the user has changed 
+     */
     public Result(int id, int userId, int oldBalance, int balanceChange) {
         this.id = id;
         this.userId = userId;

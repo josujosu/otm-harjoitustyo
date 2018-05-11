@@ -6,7 +6,7 @@
 package texasholdem.domain;
 
 /**
- *
+ * A class that encapsulates a game of Texas Hold'Em from the players to the rules
  * @author josujosu
  */
 import java.util.ArrayList;
@@ -33,6 +33,12 @@ public class Game {
     private Action latest;
     private String lastActor;
 
+    /**
+     * Constructor
+     * @param playerUser The User the player playing the game has picked
+     * @param numberOfPlayers Number of players that will participate in the game. Note
+     * that only enough players for a 52 cards can be used.
+     */
     public Game(User playerUser, int numberOfPlayers) {
         this.largestBet = 0;
         this.pot = 0;
@@ -45,6 +51,14 @@ public class Game {
         this.playerOrder = this.createPlayerOrder();
     }
 
+    /**
+     * A method for creating all of the Player objects in the given game
+     * @param playerUser The User the player has picked to play as
+     * @param n Number of players that the game will have
+     * @param deck A deck containing all of the cards that will be used in the game
+     * @return A HashMap containing a String as a key and the created Player objects 
+     * as values
+     */
     public HashMap<String, Player> createPlayers(User playerUser, int n, Deck deck) {
         HashMap<String, Player> newPlayers = new HashMap<>();
         Deck hand = new Deck(this.getDeck().takeCards(2));
@@ -56,6 +70,11 @@ public class Game {
         return newPlayers;
     }
 
+    /**
+     * A method for creating an ArrayList containing all of the player names in 
+     * the order that they will be playing.
+     * @return The player name ArrayList
+     */
     public ArrayList<String> createPlayerOrder() {
         ArrayList<String> newPlayerOrder = new ArrayList<>();
         for (String player : this.players.keySet()) {
@@ -65,10 +84,18 @@ public class Game {
         return newPlayerOrder;
     }
 
+    /**
+     * A method for taking cards from the main Deck and putting them on the table Deck
+     * @param n The number of the cards that will be put on the table
+     */
     public void putCardsOnTable(int n) {
         this.getTable().addCards(this.getDeck().takeCards(n));
     }
 
+    /**
+     * A method for playing the "blinds" 
+     * @return The player name of the next player to play
+     */
     public String playBlinds() {
         this.pot += this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).raise(this.smallBlind, 0);
         this.nextPlayer();
@@ -80,6 +107,10 @@ public class Game {
         return this.getPlayerOrder().get(this.getCurrentPlayer());
     }
 
+    /**
+     * A method that makes the AI player next in turn to play
+     * @return The return value of the returnGameState() method
+     */
     public String playNext() {
         if (!this.foldedPlayers.contains(this.playerOrder.get(this.currentPlayer))) {
             Action action = this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).play(largestBet, this.table);
@@ -103,6 +134,12 @@ public class Game {
         return this.returnGameState();
     }
 
+    /**
+     * A method that decides if the player will make an action
+     * @param command The action the player will make
+     * @param raise The amount of money the player wants to raise (can be 0)
+     * @return The return value of the returnGameState() method
+     */
     public String playHuman(String command, int raise) {
         if (!this.foldedPlayers.contains("Player")) {
             this.actPlayersCommand(command, raise);
@@ -111,9 +148,11 @@ public class Game {
         return this.returnGameState();
     }
 
-    // An unnecessary method that could be included clearly in "play human", but
-    // is it's own method because otherwise "play human" would've been a line
-    // too long for checkstyle
+    /**
+     * A method that makes the player make an action
+     * @param command The action that the player will make
+     * @param raise The amount of money the player wants to raise (can be 0)
+     */
     public void actPlayersCommand(String command, int raise) {
         switch (command) {
             case "Call":
@@ -133,6 +172,10 @@ public class Game {
         }
     }
 
+    /**
+     * A method that makes the game go through the "showdown" phase
+     * @return null
+     */
     public String playShowdown() {
         this.addTableCardsToPlayerDecks();
         ArrayList<Player> winners = this.getPlayersWithBestHand();
@@ -144,6 +187,9 @@ public class Game {
         return null;
     }
 
+    /**
+     * A method for updating the database after the game has ended
+     */
     public void updatePlayerDatabase() {
         UserDao userDao = new UserDao(new Database("jdbc:sqlite:THE.db"));
         ResultDao resultDao = new ResultDao(new Database("jdbc:sqlite:THE.db"));
@@ -159,6 +205,10 @@ public class Game {
 
     }
 
+    /**
+     * A method for acquiring the players that have the best hands in the game
+     * @return A List of the best players
+     */
     public ArrayList<Player> getPlayersWithBestHand() {
         HashMap<String, Deck> playerDecks = new HashMap<>();
         ArrayList<Player> bestPlayers = new ArrayList<>();
@@ -174,14 +224,21 @@ public class Game {
         return bestPlayers;
     }
     
+    /**
+     * Adds the cards of the table Deck to the hands of the payers, so the type
+     * of PokerHand they have can be inferred
+     */
     public void addTableCardsToPlayerDecks() {
         for (String name : this.players.keySet()) {
             this.players.get(name).getHand().addCards(this.table.getCards());
         }
     }
 
-    // Returns "GameState" ie. the label of the next player or "NextRound" for 
-    // when the game should enter the next stage.
+    /**
+     * A method for acquiring the next step that the game should make
+     * @return "EndGame" if the game should end, "NextRound" if the game should
+     * start the next round. Otherwise the name of the next player.
+     */
     public String returnGameState() {
         if (this.getFoldedPlayers().size() == this.getPlayerOrder().size() - 1) {
             return "EndGame";
@@ -193,6 +250,9 @@ public class Game {
         }
     }
 
+    /**
+     * Makes the current player the first in the player order that has not folded
+     */
     public void setCurrentPlayerToFirstNotFolded() {
         for (int i = 0; i < this.getPlayerOrder().size(); i++) {
             if (!this.foldedPlayers.contains(this.playerOrder.get(i))) {
@@ -201,6 +261,11 @@ public class Game {
         }
     }
 
+    /**
+     * Initialises the game for the next round
+     * @return "EndGame" if there's only one player that has not folded, otherwise the 
+     * name of the next player
+     */
     public String initializeForNextRound() {
         this.setCurrentPlayerToFirstNotFolded();
         this.lastRaiser = this.getCurrentPlayer(); //This way the game will go through the whole round
@@ -211,6 +276,9 @@ public class Game {
         }
     }
 
+    /**
+     * A method for initialising the game for the next round.
+     */
     public void initializeNextDeal() {
         this.removePlayersWithNoMoney();
         this.getFoldedPlayers().clear();
@@ -223,6 +291,10 @@ public class Game {
         this.table = new Deck(new ArrayList<>());
     }
 
+    /**
+     * A method that resets all of the Player-objects so that they have new cards
+     * in their hands and so that their bets are 0
+     */
     public void resetPlayers() {
         for (Player player : this.players.values()) {
             player.setHand(new Deck(this.getDeck().takeCards(2)));
@@ -230,6 +302,9 @@ public class Game {
         }
     }
     
+    /**
+     * Removes players that have no money from the game
+     */
     public void removePlayersWithNoMoney() {
         Iterator<String> iter = this.getPlayerOrder().iterator();
         while (iter.hasNext()) {
@@ -241,12 +316,18 @@ public class Game {
         }
     }
 
+    /**
+     * Prints all of the players into the terminal window.
+     */
     public void printPlayers() {
         for (String name : this.getPlayerOrder()) {
             System.out.println(this.players.get(name));
         }
     }
     
+    /**
+     * Prints all of the players that have not folded into the terminal window.
+     */
     public void printNonFoldedPlayers() {
         for (String name : this.getPlayerOrder()) {
             if (!this.foldedPlayers.contains(name)) {
@@ -255,44 +336,83 @@ public class Game {
         } 
     }
 
+    /**
+     * Sets up the next player for playing.
+     */
     public void nextPlayer() {
         this.currentPlayer++;
         if (this.getCurrentPlayer() >= this.getPlayerOrder().size()) {
             this.setCurrentPlayer(0);
         }
-        /*if (this.foldedPlayers.contains(this.playerOrder.get(this.currentPlayer))) {
-            this.nextPlayer();
-        }*/
     }
 
+    /**
+     * A method for checking if a player has folded.
+     * @param name Name of the player
+     * @return true if has folded, otherwise false
+     */
     public boolean hasFolded(String name) {
         return this.getFoldedPlayers().contains(name);
     }
     
+    /**
+     * A method for checking if there are enough players for playing the game (ie.
+     * not 2).
+     * @return true if enough, otherwise false 
+     */
     public boolean hasEnoughPlayersForPlaying() {
         return this.getPlayerOrder().size() > 1;
     }
     
+    /**
+     * Checks if a user can be used to play
+     * @param user The user to be checked
+     * @return true if can, false if can not
+     */
     public boolean playerUserCanBeUsed(User user) {
         return user.getBalance() > 0;
     }
 
+    /**
+     * A method for retrieving the name of the first player in the playing order
+     * @return The name
+     */
     public String getFirstPlayerName() {
         return this.getPlayerOrder().get(0);
     }
 
+    /**
+     * A method for retrieving the Player object the player playing the game has been using
+     * @return The Player object
+     */
     public Player getHumanPlayer() {
         return this.players.get("Player");
     }
 
+    /**
+     * A method that returns a String containing the size of the pot and the
+     * cards on the table in a format used by the TextUI
+     * @return The String
+     */
     public String getPotAndTableString() {
         return "Pot: " + this.getPot() + " Table: " + this.getTable();
     }
     
+    /**
+     * A method for retrieving the name of the currently playing player
+     * @return The name of the player
+     */
     public String currentPlayerName() {
         return this.getPlayerOrder().get(this.getCurrentPlayer());
     }
     
+    /**
+     * A method for retrieving the name of a player that has a certain relation
+     * to the current player in the player order
+     * @param rel The position of the desired player in relation to the current player
+     * (negative: before the current, positive: after)
+     * @return The name of the desired player
+     */
     public String playerInRelationToCurrent(int rel) {
         int i = this.getCurrentPlayer() + rel;
         if (i < 0) {

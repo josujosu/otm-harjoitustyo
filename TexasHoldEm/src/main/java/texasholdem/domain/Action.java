@@ -6,12 +6,14 @@
 package texasholdem.domain;
 
 /**
- *Class that encapsulates an action made by a player
+ * A Class that encapsulates an action made by a player
  * @author josujosu
  */
 public class Action {
 
-    
+    /**
+     * Enumerator for describing the type of the action
+     */
     public enum ActionType {
         CALL, RAISE, FOLD
     }
@@ -20,6 +22,12 @@ public class Action {
     private int raise;
     private ActionType type;
     
+    /**
+     * Constructor
+     * @param type The type of the action
+     * @param call The amount of money the actor needed for a call
+     * @param raise  The amount of money the actor raised
+     */
     public Action(ActionType type, int call, int raise) {
         this.type = type;
         this.call = call;
@@ -28,8 +36,7 @@ public class Action {
     
     
     /**
-     * Used to keep track of actions in the Text UI
-     * 
+     * A method for keeping track of actions in the Text UI
      * @return A string formatted in such a way that it works in the Text UI
      */
     public String toStringTextUIFormatted() {

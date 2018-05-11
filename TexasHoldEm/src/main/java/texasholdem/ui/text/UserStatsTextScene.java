@@ -6,7 +6,7 @@
 package texasholdem.ui.text;
 
 /**
- *
+ * A Class that defines the UI for when the user checking the statistics of different users
  * @author josujosu
  */
 import java.util.List;
@@ -20,24 +20,29 @@ public class UserStatsTextScene implements TextScene {
     @Override
     public TextScene run() {
         System.out.println("----User stats checker----");
+        if(!this.op.checkIfDatabaseHasAnyUsers()) {
+            System.out.println("No users to check!");
+            return new StartTextScene();
+        }
         this.selectUserToInspect();
         this.selectWhatToInspect();
         
         return new StartTextScene();
     }
     
+    /**
+     * A method for defining the UI when the user is selecting the User to inspect
+     */
     public void selectUserToInspect() {
-        System.out.println("Select user:");
-        this.listAllUsers();
-        System.out.print("> ");
-        int id = Integer.parseInt(scan.next());
-        try {
-            this.user = new UserDao(new Database("jdbc:sqlite:THE.db")).findOne(id);        
-        } catch (Exception e) {
-            System.out.println(e);
-        }        
+        System.out.println("Select user: ");
+        this.op.printAllUsers();
+        System.out.println("> ");
+        this.user = this.op.getUser(scan.next());
     }
     
+    /**
+     * A method for defining the UI when the user is selecting what to inspect
+     */
     public void selectWhatToInspect() {
         while (true) {
             System.out.print("What do you want to check?\n"
@@ -67,10 +72,17 @@ public class UserStatsTextScene implements TextScene {
         
     }
     
+    /**
+     * A method for defining the UI when the win/lose ratio is being shown
+     */
     public void printWinLossRatio() {
         System.out.println("W/L: " + this.user.getWinLoseRatio());
     }
     
+    /**
+     * A method for defining the UI when the balance history of a User is being
+     * shown
+     */
     public void printBalanceHistory() {
         List<Integer> balances = this.user.getBalanceHistory();
         int i = 1;
@@ -81,6 +93,9 @@ public class UserStatsTextScene implements TextScene {
         }
     }
     
+    /**
+     * A method defining the UI when the wins and losses of a User are being shown
+     */
     public void printWinsAndLosses() {
         List<Integer> winnings = this.user.getWinsAndLosses();
         int i = 1;
@@ -89,23 +104,6 @@ public class UserStatsTextScene implements TextScene {
             System.out.println(i + ": " + win);
             i++;
         }
-    }
-    
-    public void listAllUsers(){
-        UserDao dao = new UserDao(new Database("jdbc:sqlite:THE.db"));
-        List<User> users;
-        try{
-            users = dao.findAll();
-            if(users.isEmpty()){
-                System.out.println("No users found!");
-            } else {
-                for(User user: users){
-                    System.out.println(user);
-                }    
-            }            
-        } catch (Exception e){
-            System.out.println(e);
-        }        
     }
     
 }
