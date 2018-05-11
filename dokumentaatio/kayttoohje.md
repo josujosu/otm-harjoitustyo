@@ -5,7 +5,7 @@ Ohjelma olettaa, että *database*-tiedosto *THE.db* löytyy sovelluksen käynnis
 ## Ohjelman käynnistäminen
 Ohjelman käynnistäminen tapahtuu komennolla
 
-    java -jar texasholdem.jar
+    java -jar TexasHoldEm.jar
     
 ## Ohjelman sisällä liikkuminen
 
