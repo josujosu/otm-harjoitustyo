@@ -24,6 +24,12 @@ Jokainen testiluokka keskittyy pääosin tietyn luokan toimintojen testaamiseen,
 
 DAO-luokkien ja niiden toiminnallisuuksia käyttävien luokkien testit on toteutettu muodostamalla jokaista erillistä testiä varten väliaikainen testitietokanta. Tietokanta rakennetaan ennen testiä, muokataan testissä ja poistetaan testin jälkeen.
 
+### Testikattavuus
+
+![Testikattavuuskuva](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/kuvat/testikattavuus.png)
+
+Sovelluksen testien rivikattavuus on noin 77% ja haarautumiskattavuus 72%
+
 ## Järjestelmätason testit
 
 ### Konfigurointi
