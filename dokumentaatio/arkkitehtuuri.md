@@ -12,15 +12,15 @@ Pakkaus *texasholdem.ui* sisältää tekstikäyttöliittymän, *texasholdem.doma
 
 Sovelluksen tekstikäyttöliittymä koostuu neljästä erillisestä näykmäoliosta:
 
-- StartTextScene, eli aloitus valikko
+- [StartTextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/StartTextScene.java), eli aloitus valikko
 
 - [CreateUserTextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/CreateUserTextScene.java), eli käyttäjien hallinnoimisen valikko
 
-- UserStatsTextScene, eli käyttäjien tilastojen tarkastelemisen valkko
+- [UserStatsTextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/UserStatsTextScene.java), eli käyttäjien tilastojen tarkastelemisen valkko
 
-- PlayingTextScene, eli itse pelaamisen näkymä
+- [PlayingTextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/PlayingTextScene.java), eli itse pelaamisen näkymä
 
-Jokainen näistä näkymäolioista toteuttaa *TextScene*-rajapinnan, joka mahdollistaa näkymien saumattoman vaihtamisen. Näkymien vaihtaminen perustuu *TextScene*:n määrittämään *run()*-metodiin, joka tekstikäyttöliittymän ulkoasun ja toiminnallisuuden määrittämisen lisäksi palauttaa *return*-arvonaan seuraavan näkymäolion. *TextUI*-luokka ajaa näiden näkymäolioiden *run()*-metodeja, ja saatuaan niiden palautusarvona seuraavan näkymäolion, aloittaa *TextUI* tämän olion *run()*-metodin ajamisen. Tämä jatkuu, kunnes *TextUI* saa palautusarvona null, jolloin ohjelma lopetetaan.
+Jokainen näistä näkymäolioista toteuttaa [TextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/TextScene.java)-rajapinnan, joka mahdollistaa näkymien saumattoman vaihtamisen. Näkymien vaihtaminen perustuu [TextScene](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/ui/text/TextScene.java):n määrittämään *run()*-metodiin, joka tekstikäyttöliittymän ulkoasun ja toiminnallisuuden määrittämisen lisäksi palauttaa *return*-arvonaan seuraavan näkymäolion. *TextUI*-luokka ajaa näiden näkymäolioiden *run()*-metodeja, ja saatuaan niiden palautusarvona seuraavan näkymäolion, aloittaa *TextUI* tämän olion *run()*-metodin ajamisen. Tämä jatkuu, kunnes *TextUI* saa palautusarvona null, jolloin ohjelma lopetetaan.
 
 ## Sovelluslogiikka
 
