@@ -1,5 +1,5 @@
 # Käyttöohje
-Lataa tiedosto ...
+Lataa tiedosto TexasHoldEm.jar ja THE.db
 ## Konfigurointi
 Ohjelma olettaa, että *database*-tiedosto *THE.db* löytyy sovelluksen käynnistyshakemistosta. Tämä tiedosto pitää sisällään pelaajien tekemät käyttäjät ja niiden saldoihin liittyvät.
 ## Ohjelman käynnistäminen
