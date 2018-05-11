@@ -38,6 +38,12 @@ Pelaajien käsien määrittely tapahtuu [HandComparator](https://github.com/josu
 
 Jokaiseen [Player](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Player.java)-olioon liittyy myös [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java)-olio. [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java) kapsuloi tiettyn pelaajan tekemän käyttäjän sen hetkisen saldo-tilanteen. Käyttäjien saldoihin tapahtuneet muutokset tallennetaan [Result](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Result.java)-olioina.
 
+## Tietojen tallennus tietokantaan
+
+Sovelluksen datamalli koostuu kahdesta luokasta: [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java) ja [Result](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Result.java). Nämä kuvaavat vastaavasti sovellukseen kirjattuja käyttäjiä ja niihin liitettyjä tuloksia. Käyttäjät ja tulokset tallennetaan ennaltamäärättyyn tietokantaan: *THE.db*. Tietokantaan tallentaminen ja sen tietojen tarkastelu käyttävät hyväkseen rajapinnan *Dao*, sekä *UserDao*- ja *ResultDao*-luokkien määrittelemiä toiminnallisuuksia, jotka taas toimivat *Collector*-rajapinnan, *User-* ja *ResultCollector*-luokkien, sekä *Database*-luokan määrittelemien toimintojen avulla.
+
+
+
 ## Päätoiminnallisuudet
 
 ### Pelin kulku
