@@ -72,3 +72,8 @@ Olellinen osa Texas Hold'Em:ia on pelaajien parhaiden käsien tunnistus. Ohessa 
 
 ![Kuva ohjelman arkkitehtuurista](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/kuvat/getBestHandsSequence.png)
 
+## Ohjelman rakenteeseen jääneet heikkoudet
+
+### Käyttöliittymän ja sovelluslogiikan eristäminen
+
+Käyttöliitymä ja sovelluslogiikka ovat erittäin kytkeytyneet toisiinsa, sillä pelin kulun määrittää käyttöliittyän kutsut luokan *Game* metodeihin. Käyttöliittymän täydellinen muokkaaminen täällä hetkellä vaatisi siis samalla sovelluslogiikan vaativaa muokkausta.
