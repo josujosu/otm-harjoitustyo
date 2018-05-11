@@ -74,6 +74,6 @@ Olellinen osa Texas Hold'Em:ia on pelaajien parhaiden käsien tunnistus. Ohessa 
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
 
-### Käyttöliittymän ja sovelluslogiikan eristäminen
+### Käyttöliittymän ja sovelluslogiikan toisiinsa kytkeytyminen
 
 Käyttöliitymä ja sovelluslogiikka ovat erittäin kytkeytyneet toisiinsa, sillä pelin kulun määrittää käyttöliittyän kutsut luokan *Game* metodeihin. Käyttöliittymän täydellinen muokkaaminen täällä hetkellä vaatisi siis samalla sovelluslogiikan vaativaa muokkausta.
