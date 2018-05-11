@@ -27,6 +27,7 @@ public class Database {
      * @param databaseAddress Address of the database
      */
     public Database(String databaseAddress) {
+        
         try {
             this.connection = DriverManager.getConnection(databaseAddress);
         } catch (Exception e) {
@@ -45,8 +46,10 @@ public class Database {
      */
     public <T> List<T> queryAndCollect(final String query, final Collector<T>
             col, final Object...params) throws SQLException {
+        
         List<T> lines = new ArrayList<>();
         PreparedStatement stmt = this.connection.prepareStatement(query);
+        
         for (int i = 0; i < params.length; i++) {
             stmt.setObject(i + 1, params[i]);
         }

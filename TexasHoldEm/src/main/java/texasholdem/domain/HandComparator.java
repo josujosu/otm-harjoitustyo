@@ -6,7 +6,6 @@
 package texasholdem.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -35,18 +34,26 @@ public class HandComparator {
      * the best hands
      */
     public ArrayList<String> getBest(HashMap<String, Deck> map) {
+        
         ArrayList<String> best = new ArrayList<>();
         ArrayList<String> names = new ArrayList<>();
         names.addAll(map.keySet());
         best.add(names.get(0));
+        
         for (int i = 1; i < names.size(); i++) {
             int comparison = this.compare(new PokerHand(map.get(best.get(0))), new PokerHand(map.get(names.get(i))));
+            
             if (comparison < 0) {
+                
                 best.clear();
                 best.add(names.get(i));
+            
             } else if (comparison == 0) {
+                
                 best.add(names.get(i));
+            
             }
+        
         }
         return best;
     }
@@ -61,7 +68,9 @@ public class HandComparator {
      * are equally good
      */
     public int compare(PokerHand hand1, PokerHand hand2) {
+        
         this.getExcluded().clear();
+        
         if (this.handTypes.get(hand1.getHandType()) > this.handTypes.get(hand2.getHandType())) {
             return 1;
         } else if (this.handTypes.get(hand1.getHandType()) < this.handTypes.get(hand2.getHandType())) {

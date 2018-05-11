@@ -32,11 +32,13 @@ public class UserDao implements Dao<User, Integer> {
     @Override
     public User findOne(Integer key) throws SQLException {
         List<User> user = this.db.queryAndCollect("SELECT * FROM User WHERE id = ?", new UserCollector(), key);
+        
         if (user.isEmpty()) {
             return null;
         } else {
             return user.get(0);
         }
+    
     }
 
     @Override

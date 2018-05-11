@@ -60,13 +60,17 @@ public class Game {
      * as values
      */
     public HashMap<String, Player> createPlayers(User playerUser, int n, Deck deck) {
+        
         HashMap<String, Player> newPlayers = new HashMap<>();
         Deck hand = new Deck(this.getDeck().takeCards(2));
+        
         newPlayers.put("Player", new Player(playerUser, hand));
+        
         for (int i = 1; i < n; i++) {
             hand = new Deck(this.getDeck().takeCards(2));
             newPlayers.put("CPU" + i, new Player(new User(i, "CPU" + i, 4000), hand));
         }
+        
         return newPlayers;
     }
 
@@ -76,10 +80,13 @@ public class Game {
      * @return The player name ArrayList
      */
     public ArrayList<String> createPlayerOrder() {
+        
         ArrayList<String> newPlayerOrder = new ArrayList<>();
+        
         for (String player : this.players.keySet()) {
             newPlayerOrder.add(player);
         }
+        
         Collections.shuffle(newPlayerOrder);
         return newPlayerOrder;
     }
@@ -97,6 +104,7 @@ public class Game {
      * @return The player name of the next player to play
      */
     public String playBlinds() {
+        
         this.pot += this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).raise(this.smallBlind, 0);
         this.nextPlayer();
         this.pot += this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).raise(this.bigBlind, 0);
@@ -105,6 +113,7 @@ public class Game {
         this.setLastRaiser(this.getCurrentPlayer());
         this.setCurrentPlayer(this.getCurrentPlayer());
         return this.getPlayerOrder().get(this.getCurrentPlayer());
+    
     }
 
     /**
@@ -112,8 +121,10 @@ public class Game {
      * @return The return value of the returnGameState() method
      */
     public String playNext() {
+        
         if (!this.foldedPlayers.contains(this.playerOrder.get(this.currentPlayer))) {
             Action action = this.players.get(this.getPlayerOrder().get(this.getCurrentPlayer())).play(largestBet, this.table);
+            
             switch (action.getType()) {
                 case CALL:
                     this.pot += action.getCall();
@@ -127,8 +138,10 @@ public class Game {
                     this.getFoldedPlayers().add(this.getPlayerOrder().get(this.getCurrentPlayer()));
                     break;
             }
+            
             this.latest = action;
             this.lastActor = this.getPlayerOrder().get(this.getCurrentPlayer());
+        
         }
         this.nextPlayer();
         return this.returnGameState();
@@ -141,9 +154,11 @@ public class Game {
      * @return The return value of the returnGameState() method
      */
     public String playHuman(String command, int raise) {
+        
         if (!this.foldedPlayers.contains("Player")) {
             this.actPlayersCommand(command, raise);
         }
+        
         this.nextPlayer();
         return this.returnGameState();
     }
@@ -154,6 +169,7 @@ public class Game {
      * @param raise The amount of money the player wants to raise (can be 0)
      */
     public void actPlayersCommand(String command, int raise) {
+        
         switch (command) {
             case "Call":
                 this.pot += this.players.get("Player").call(largestBet);
@@ -177,12 +193,15 @@ public class Game {
      * @return null
      */
     public String playShowdown() {
+        
         this.addTableCardsToPlayerDecks();
         ArrayList<Player> winners = this.getPlayersWithBestHand();
         int potFraction = this.getPot() / winners.size();
+        
         for (Player player : winners) {
             player.getUser().addToBalance(potFraction);
         }
+        
         this.updatePlayerDatabase();
         return null;
     }
@@ -191,14 +210,18 @@ public class Game {
      * A method for updating the database after the game has ended
      */
     public void updatePlayerDatabase() {
+        
         UserDao userDao = new UserDao(new Database("jdbc:sqlite:THE.db"));
         ResultDao resultDao = new ResultDao(new Database("jdbc:sqlite:THE.db"));
         User userInGame = this.players.get("Player").getUser();
+        
         try {
+            
             User humanUser = userDao.findOne(userInGame.getId());
             int winnings = userInGame.getBalance() - userDao.findOne(humanUser.getId()).getBalance();
             resultDao.save(new Result(1, humanUser, winnings));
             userDao.addToBalance(humanUser.getId(), winnings);
+        
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -210,17 +233,24 @@ public class Game {
      * @return A List of the best players
      */
     public ArrayList<Player> getPlayersWithBestHand() {
+        
         HashMap<String, Deck> playerDecks = new HashMap<>();
         ArrayList<Player> bestPlayers = new ArrayList<>();
+        
         for (String name : this.players.keySet()) {
+            
             if (!this.hasFolded(name)) {
                 playerDecks.put(name, this.players.get(name).getHand());
             }
+        
         }
+        
         HandComparator comp = new HandComparator();
+        
         for (String name : comp.getBest(playerDecks)) {
             bestPlayers.add(this.players.get(name));
         }
+        
         return bestPlayers;
     }
     
@@ -240,9 +270,11 @@ public class Game {
      * start the next round. Otherwise the name of the next player.
      */
     public String returnGameState() {
+       
         if (this.getFoldedPlayers().size() == this.getPlayerOrder().size() - 1) {
             return "EndGame";
         }
+        
         if (this.getCurrentPlayer() == this.lastRaiser) {
             return "NextRound";
         } else {
@@ -254,11 +286,13 @@ public class Game {
      * Makes the current player the first in the player order that has not folded
      */
     public void setCurrentPlayerToFirstNotFolded() {
+        
         for (int i = 0; i < this.getPlayerOrder().size(); i++) {
             if (!this.foldedPlayers.contains(this.playerOrder.get(i))) {
                 this.setCurrentPlayer(i);
             }
         }
+    
     }
 
     /**
@@ -269,11 +303,13 @@ public class Game {
     public String initializeForNextRound() {
         this.setCurrentPlayerToFirstNotFolded();
         this.lastRaiser = this.getCurrentPlayer(); //This way the game will go through the whole round
+        
         if (this.getFoldedPlayers().size() == this.getPlayerOrder().size() - 1) {
             return "EndGame";
         } else {
             return this.getPlayerOrder().get(this.getCurrentPlayer());
         }
+    
     }
 
     /**
@@ -307,6 +343,7 @@ public class Game {
      */
     public void removePlayersWithNoMoney() {
         Iterator<String> iter = this.getPlayerOrder().iterator();
+        
         while (iter.hasNext()) {
             String name = iter.next();
             if (this.players.get(name).getUser().getBalance() <= 0) {
@@ -314,6 +351,7 @@ public class Game {
                 this.players.remove(name);
             }
         }
+    
     }
 
     /**

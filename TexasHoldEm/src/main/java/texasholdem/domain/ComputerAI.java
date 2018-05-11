@@ -47,12 +47,15 @@ public class ComputerAI {
      * @return The decided action that the player will make
      */
     public Action makeAction(Deck hand, int call) {
+        
         this.decreaseProbabilitiesAccordingToRoundNumber(hand);
+        
         if (this.hasBetterHandThanHigh(hand)) {
             return this.selectRandomAction(this.handCallProbability, this.handRaiseProbability, call);
         } else {
             return this.selectRandomAction(callProbability, raiseProbability, call);
         }
+    
     }
     
     /**
@@ -65,14 +68,23 @@ public class ComputerAI {
      * @return The selected Action
      */
     public Action selectRandomAction(double cProb, double rProb, int call) {
+        
         if (this.ran.nextDouble() < rProb) {
+        
             return new Action(Action.ActionType.RAISE, call, this.ran.nextInt(this.maxNormalBet));
+        
         } else if (this.ran.nextDouble() < cProb) {
+        
             return new Action(Action.ActionType.CALL, call, 0);
+        
         } else if (this.ran.nextDouble() < this.allInProbability) {
+        
             return new Action(Action.ActionType.RAISE, call, Integer.MAX_VALUE);
+        
         } else {
+        
             return new Action(Action.ActionType.FOLD, 0, 0);
+        
         }
     }
     
@@ -83,8 +95,10 @@ public class ComputerAI {
      * @return true, if the deck contains a hand better than high, otherwise false
      */
     public boolean hasBetterHandThanHigh(Deck deck) {
+        
         PokerHand hand = new PokerHand(deck);
         return hand.getHandType() != PokerHand.HandType.HIGH;
+    
     }
     
     /**
@@ -93,9 +107,11 @@ public class ComputerAI {
      * @param deck The current deck from which the number of the round is inferred
      */
     public void decreaseProbabilitiesAccordingToRoundNumber(Deck deck) {
+        
         double dec = this.getRoundNumberFromNumberOfCards(deck) / 10;
         this.callProbability -= dec;
         this.handCallProbability -= dec;
+    
     }
     
     /**
@@ -107,7 +123,9 @@ public class ComputerAI {
      * @return The number of the current round as an integer.
      */
     public int getRoundNumberFromNumberOfCards(Deck deck) {
+        
         int n = deck.getCards().size();
+        
         switch (n) {
             case 2:
                 return 1;
@@ -120,5 +138,6 @@ public class ComputerAI {
             default:
                 return 0;
         }
+    
     }  
 }

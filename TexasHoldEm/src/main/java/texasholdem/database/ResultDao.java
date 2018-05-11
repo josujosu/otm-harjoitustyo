@@ -29,7 +29,9 @@ public class ResultDao implements Dao<Result, Integer> {
 
     @Override
     public Result findOne(Integer key) throws SQLException {
+        
         List<Result> result = this.db.queryAndCollect("SELECT * FROM Result WHERE id = ?", new ResultCollector(), key);
+        
         if (result.isEmpty()) {
             return null;
         } else {

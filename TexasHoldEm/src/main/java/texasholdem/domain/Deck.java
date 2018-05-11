@@ -42,18 +42,22 @@ public class Deck {
      * @return An ArrayList containing all of the 52 cards as Card objects
      */
     public ArrayList<Card> create52CardDeck() {
+        
         ArrayList<Card> newDeck = new ArrayList<>();
         List<Card.Suit> suits = new ArrayList<>();
+        
         suits.add(Card.Suit.HEARTS);
         suits.add(Card.Suit.DIAMONDS);
         suits.add(Card.Suit.CLUBS);
         suits.add(Card.Suit.SPADES);
+        
         for (int i = 0; i < 4; i++) {
             Card.Suit suit = suits.get(i);
             for (int rank = 2; rank < 15; rank++) {
                 newDeck.add(new Card(suit, rank));
             }
         }
+        
         Collections.shuffle(newDeck);
         return newDeck;
     }
@@ -65,13 +69,18 @@ public class Deck {
      * @return An ArrayList containing all the taken cards as Card objects
      */
     public ArrayList<Card> takeCards(int n) {
+        
         ArrayList<Card> taken = new ArrayList<>();
+        
         if (n <= this.cards.size()) {
+            
             for (int i = 0; i < n; i++) {
                 taken.add(this.cards.get(0));
                 this.cards.remove(0);
             }
+        
         }
+        
         return taken;
     }
     
@@ -86,10 +95,13 @@ public class Deck {
     
     @Override
     public String toString() {
+        
         String string = "";
+        
         for (Card card : this.cards) {
             string += card + " ";
         }
+        
         return string;
     }
 

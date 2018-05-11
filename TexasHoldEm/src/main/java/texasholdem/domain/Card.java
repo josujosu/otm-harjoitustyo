@@ -37,6 +37,7 @@ public class Card {
      * @return The unicode for a symbol of the corresponding suit as a String
      */
     public String suitAsString(Card.Suit suit) {
+        
         switch (suit) {
             case CLUBS:
                 return "\u2663";
@@ -49,6 +50,7 @@ public class Card {
             default:
                 return null;
         }
+    
     }
     
     /**
@@ -58,6 +60,7 @@ public class Card {
      * A if rank value = 14 or the value as String if none of the former
      */
     public String rankAsString(int rank) {
+        
         switch (rank) {
             case 11: 
                 return "J";
@@ -70,6 +73,7 @@ public class Card {
             default:
                 return Integer.toString(rank);
         }
+    
     }
     
     @Override

@@ -40,6 +40,7 @@ public class Action {
      * @return A string formatted in such a way that it works in the Text UI
      */
     public String toStringTextUIFormatted() {
+        
         switch (this.type) {
             case CALL:
                 return "Called/Checked";
@@ -50,6 +51,7 @@ public class Action {
             default:
                 return "Did something";
         }
+    
     }
     
     /**
