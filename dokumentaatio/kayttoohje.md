@@ -1,5 +1,5 @@
 # Käyttöohje
-Lataa tiedosto TexasHoldEm.jar ja THE.db
+Lataa tiedosto [TexasHoldEm.jar](https://github.com/josujosu/otm-harjoitustyo/releases/tag/viikko7) ja THE.db
 ## Konfigurointi
 Ohjelma olettaa, että *database*-tiedosto *THE.db* löytyy sovelluksen käynnistyshakemistosta. Tämä tiedosto pitää sisällään pelaajien tekemät käyttäjät ja niiden saldoihin liittyvät.
 ## Ohjelman käynnistäminen
@@ -38,21 +38,26 @@ Valitsemalla komennon *1*, käyttäjältä kysytään käyttäjänimeä. Käytt�
 
 Antamalla komennon *2* päänäkymässä pääsee pelaamaan Texas Hold'Em:ia. Ennen kuin voi aloittaa pelin, sovellus vaatii pelaajaa antamaan hänen käyttämänsä käyttäjän *id*-tunnuksen. Itse pelinäkymä näyttää esimerkiksi tältä:
 
-    CPU4: Folded
     CPU5: Called/Checked
-    CPU2: Folded
-    CPU7: Folded
-    CPU1: Called/Checked
-    CPU5: Called/Checked
-    CPU1: Called/Checked
-    CPU6: Folded
-    Pot: 75 Table: 4♠ K♣ 2♥ 
-    User: id: 3, username: Joonas, balance: 10784, bet: 10, Hand: 4♣ 2♠ 
+    CPU2: Called/Checked
+    CPU7: Called/Checked
+    CPU6: Called/Checked
+    CPU2: Called/Checked
+    CPU7: Called/Checked
+    CPU6: Called/Checked
+    CPU3: Folded
+    ---PLAYER TURN---
+    Pot: 105 Table: 4♠ 2♠ K♥ 
+    User: id: 1, username: Test, balance: 33932, bet: 10, Hand: 8♣ 5♥ 
+    What will you do?
     Actions: 
-     Call, Raise, Fold
-    What will you do? 
+    1: Call/Check 
+    2: Raise 
+    3: Fold
+    > 
 
-Sovellus tulostaa tekoälypelaajien tekemät toiminnot, sen hetikisen potin, pöydällä olevat kortit, sekä pelaajan käyttämän käyttäjän tiedot. Pelaaja voi antaa komennoksi *Call*, *Raise* tai *Fold* (komennon oltava identtinen esitetyn muodon kanssa, väärät komennot toimivat *Call* komennon tavoin). Pelin loputtua sovellus tulostaa jokaisen loppuun asti pelanneen pelaajan tiedot. Pelin tapahtumien tiedot tallentuvat automaattisesti tietokantaan.
+
+Sovellus tulostaa tekoälypelaajien tekemät toiminnot, sen hetikisen potin, pöydällä olevat kortit, sekä pelaajan käyttämän käyttäjän tiedot. Pelaaja voi antaa komennoksi *1*, *2* tai *3* (komento *1* vastaa toimintoa *Call* tai *Check*, *2* toimintoa *Raise* ja *3* toimintoa *Fold*). Pelin loputtua sovellus tulostaa jokaisen loppuun asti pelanneen pelaajan tiedot. Pelin tapahtumien tiedot tallentuvat automaattisesti tietokantaan.
 
 ## Käyttäjätilastojen tarkastelu
 
