@@ -38,7 +38,7 @@ Jokaiseen [Player](https://github.com/josujosu/otm-harjoitustyo/blob/master/Texa
 
 ## Tietojen tallennus tietokantaan
 
-Sovelluksen looginen datamalli koostuu kahdesta luokasta: [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java) ja [Result](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Result.java). Nämä kuvaavat vastaavasti sovellukseen kirjattuja käyttäjiä ja niihin liitettyjä tuloksia. Käyttäjät ja tulokset tallennetaan ennaltamäärättyyn tietokantaan: *THE.db*. Tietokantaan tallentaminen ja sen tietojen tarkastelu käyttävät hyväkseen rajapinnan *Dao*, sekä *UserDao*- ja *ResultDao*-luokkien määrittelemiä toiminnallisuuksia, jotka taas toimivat *Collector*-rajapinnan, *UserCollector*- ja *ResultCollector*-luokkien, sekä *Database*-luokan määrittelemien toimintojen avulla.
+Sovelluksen looginen datamalli koostuu kahdesta luokasta: [User](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/User.java) ja [Result](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/main/java/texasholdem/domain/Result.java). Nämä kuvaavat vastaavasti sovellukseen kirjattuja käyttäjiä ja niihin liitettyjä tuloksia. Käyttäjät ja tulokset tallennetaan ennaltamäärättyyn, sovelluksen juuresta löytyvään, tietokantaan: *THE.db*. Tietokantaan tallentaminen ja sen tietojen tarkastelu käyttävät hyväkseen rajapinnan *Dao*, sekä *UserDao*- ja *ResultDao*-luokkien määrittelemiä toiminnallisuuksia, jotka taas toimivat *Collector*-rajapinnan, *UserCollector*- ja *ResultCollector*-luokkien, sekä *Database*-luokan määrittelemien toimintojen avulla.
 
 ### Tietokanta
 
@@ -48,7 +48,19 @@ Tietokanta on SQLite-tietokanta, joka koostuu seuraavan tyyppisistä taulukoista
 
 id|username|balance 
 --|--------|-------
-1|kalle|2000
+1|Kalle|2000
+2|Joonas|1200
+...|...|...
+
+#### Result
+
+id|userId|oldBalance|balanceChange
+--|------|----------|-------------
+1|1|100|-70
+2|2|100|70
+3|1|30|1970
+4|2|170|-170
+...|...|...|...
 
 ## Päätoiminnallisuudet
 
