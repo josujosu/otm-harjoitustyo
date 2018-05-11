@@ -42,7 +42,7 @@ Sovelluksen looginen datamalli koostuu kahdesta luokasta: [User](https://github.
 
 ### Tietokanta
 
-Tietokanta on SQLite-tietokanta, joka koostuu seuraavan tyyppisistä taulukoista:
+Sovelluksen tietokanta on SQLite-tietokanta, joka koostuu seuraavan tyyppisistä taulukoista:
 
 #### User
 
