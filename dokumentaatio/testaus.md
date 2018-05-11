@@ -18,11 +18,20 @@ Automatisoidut JUnit-testit testaavat sovelluslogiikkaa, sekä tietokannan käsi
 - [ResultDaoTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/database/ResultDaoTest.java)
 - [UserDaoTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/database/UserDaoTest.java)
 
+Jokainen testiluokka keskittyy pääosin tietyn luokan toimintojen testaamiseen, mutta testaa myös toimintoja, joihin liittyy eri luokkien välisiä toimintoja.  
+
 ### DAO-luokat
 
 DAO-luokkien ja niiden toiminnallisuuksia käyttävien luokkien testit on toteutettu muodostamalla jokaista erillistä testiä varten väliaikainen testitietokanta. Tietokanta rakennetaan ennen testiä, muokataan testissä ja poistetaan testin jälkeen.
 
 ## Järjestelmätason testit
 
+### Konfigurointi
+
+Järjestelmää on testattu Linux-ympäristössä noudattaen [käyttöohjeen](https://github.com/josujosu/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) mukaisia ohjetta. Sovellusta on myös testattu tapauksessa, jossa *THE.db* tietokanta tiedostoa ei löydy sovelluksen juurikansiosta, jolloin sovellus on luonut sen itse.
+
+### Toiminnalisuudet
+
+Vaatimusmäärittelyssä määritellyt toiminnallisuudet on testattu. Sovellusta on myös testattu vastaamalla sen tekemiin komentopyyntöihin epäpätevillä komennoilla.
 
 
