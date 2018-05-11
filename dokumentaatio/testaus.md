@@ -1,22 +1,28 @@
 # Testausdokumentti
 
-Ohjelmaa on testattu sekä automaattisilla JUnit-testeillä, sekä manuaalisesti ohjelmaa ajamalla.
+Ohjelmaa on testattu sekä automaattisilla JUnit-testeillä, sekä manuaalisilla järjestelmätason testeillä.
 
 ## JUnit-testit
 
-Automatisoidut JUnit-testit testaavat sovelluslogiikkaa, sekä datan käsittelystä vastaavia luokkia. Testiluokat ovat seuraavat:
+Automatisoidut JUnit-testit testaavat sovelluslogiikkaa, sekä tietokannan käsittelystä vastaavia luokkia. Testiluokat ovat seuraavat:
 
-- [CardTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/CardTest.java)
-- [ComputerAITest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/ComputerAITest.java)
-- [DeckTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/DeckTest.java)
-- [GameTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/GameTest.java)
-- [HandComparatorTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/HandComparatorTest.java)
-- [PlayerTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/PlayerTest.java)
-- [PokerHandTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/PokerHandTest.java)
-- [UIOperationsTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/UIOperationsTest.java)
-- [UserTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/UserTest.java)
-- [ResultDaoTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/database/ResultDaoTest.java)
-- [UserDaoTest](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/database/UserDaoTest.java)
+- [CardTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/CardTest.java)
+- [ComputerAITest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/ComputerAITest.java)
+- [DeckTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/DeckTest.java)
+- [GameTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/GameTest.java)
+- [HandComparatorTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/HandComparatorTest.java)
+- [PlayerTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/PlayerTest.java)
+- [PokerHandTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/PokerHandTest.java)
+- [UIOperationsTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/UIOperationsTest.java)
+- [UserTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/domain/UserTest.java)
+- [ResultDaoTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/database/ResultDaoTest.java)
+- [UserDaoTest.java](https://github.com/josujosu/otm-harjoitustyo/blob/master/TexasHoldEm/src/test/java/database/UserDaoTest.java)
+
+### DAO-luokat
+
+DAO-luokkien ja niiden toiminnallisuuksia käyttävien luokkien testit on toteutettu muodostamalla jokaista erillistä testiä varten väliaikainen testitietokanta. Tietokanta rakennetaan ennen testiä, muokataan testissä ja poistetaan testin jälkeen.
+
+## Järjestelmätason testit
 
 
 
