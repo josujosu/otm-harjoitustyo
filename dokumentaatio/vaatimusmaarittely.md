@@ -44,5 +44,6 @@ Sovelluksessa on vain yhdenlaisia käyttäjiä, eli käyttäjiä ovat vain pelin
 - Mahdollisuus antaa tekoälyn pelata tietyllä tunnuksella
 - Tilastojen esittäminen diagrammina
 - Pelaaminen muiden ihmisten kanssa
+- Graaffinen käyttöliittymä
 
 
